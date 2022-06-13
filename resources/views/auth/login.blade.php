@@ -26,9 +26,12 @@
                             <div class="card-body">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        <span class="alert-text">{{$message}}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                 @enderror
 
                                 <form method="POST" role="form" class="text-start" action="{{ route('login') }}">

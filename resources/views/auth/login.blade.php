@@ -24,7 +24,14 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form role="form" class="text-start" action="{{ route('login') }}">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                                <form method="POST" role="form" class="text-start" action="{{ route('login') }}">
 
                                     @csrf
 

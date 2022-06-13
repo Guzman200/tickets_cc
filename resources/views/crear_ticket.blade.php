@@ -5,16 +5,27 @@
       <h2>Crear Tickets</h2>
       <div class="card card-frame">
          <div class="card-body">
-           <!-- This is some text within a card body.-->
-           <form method="post" action="" enctype="multipart/form-data">
-               <div class="form-group">
-                  <label><strong>Descripción :</strong></label>
-                  <textarea class="ckeditor form-control" id="ckeditor"name="description"></textarea>
+           {{-- @livewire('crear-ticket') --}}
+            @error('descripcion')
+               <div class="alert alert-danger alert-dismissible fade show text-light" role="alert">
+                     
+                     <span class="alert-text"><strong>Error! </strong>{{ $message }}</span>
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
                </div>
-            <div class="form-group text-center mt-3">
-                <button type="submit" class="btn btn-success btn-lg">Crear Ticket</button>
+            @enderror
+           <form method="POST" action="{{ route('create_ticket') }}">
+            @csrf
+            <div class="form-group">
+               <label><strong>Descripción :</strong></label>
+               <textarea class="ckeditor form-control" id="ckeditor"name="descripcion" required></textarea>
             </div>
-        </form>
+            <div class="form-group text-center mt-3">
+               <button type="submit" class="btn btn-success btn-lg">Crear Ticket</button>
+            </div>         
+            </form> 
+
          </div>
        </div>
    
@@ -28,6 +39,7 @@
 
    <script type="text/javascript">
 
+      // Inicilizacion del plugin ckeditor
       CKEDITOR.replace('ckeditor', {
          // Define the toolbar groups as it is a more accessible solution.
          toolbarGroups: [

@@ -21,6 +21,6 @@ class Tickets extends Model
 
     public function estatus()
     {
-        return $this->belongsTo(Estatus::class, 'estatus_id', 'id');
+        return $this->belongsTo(EstatusTicket::class, 'estatus_id', 'id');
     }
 }

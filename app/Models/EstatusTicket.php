@@ -10,5 +10,5 @@ class Estatus extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = "estatus";
+    protected $table = "estatus_tickets";
 }

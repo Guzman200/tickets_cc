@@ -10,5 +10,5 @@ class TipoUsuario extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = "tipo_usuario";
+    protected $table = "tipos_usuario";
 }

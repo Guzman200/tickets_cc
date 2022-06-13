@@ -17,15 +17,15 @@ class CreateTicketsTable extends Migration
             $table->id();
            
             $table->unsignedBigInteger('usuario_id');
-            $table->unsignedBigInteger('estatus_id');
+            $table->unsignedBigInteger('estatus_ticket_id');
             $table->string('solicitud');
             $table->timestamps();
 
             $table->foreign('usuario_id')
-                ->references('id')->on('area');
+                ->references('id')->on('users');
 
-            $table->foreign('estatus_id')
-                ->references('id')->on('estatus');
+            $table->foreign('estatus_ticket_id')
+                ->references('id')->on('estatus_tickets');
                    
         });
     }

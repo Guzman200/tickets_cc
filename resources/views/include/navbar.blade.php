@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white active" href="{{route('home')}}">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'home' ? 'active' : ''}}" href="{{route('home')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -22,7 +22,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/tables.html">
+                <a class="nav-link text-white {{Route::currentRouteName() == 'users' ? 'active' : ''}}" href="{{route('users')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Usuarios</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{Route::currentRouteName() == 'tickets' ? 'active' : ''}}" href="{{route('tickets')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
@@ -30,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/tables.html">
+                <a class="nav-link text-white {{Route::currentRouteName() == 'crear_ticket' ? 'active' : ''}}" href="{{route('crear_ticket')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>

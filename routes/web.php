@@ -19,5 +19,17 @@ Auth::routes();
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('/usuarios', function(){
+        return view('users');
+    })->name('users');
+
+    Route::get('/tickets', function(){
+        return view('tickets');
+    })->name('tickets');
+
+    Route::get('/crear-ticket', function(){
+        return view('crear_ticket');
+    })->name('crear_ticket');
     
 });

@@ -22,4 +22,10 @@ class TicketController extends Controller
 
         return redirect('tickets')->with('creacion_ticket_status', 'Ticket Creado con Exito!');
     }
+
+    public function verDescripcion(Request $request, Tickets $ticket){
+
+        $descripcion = $ticket->descripcion;
+        return view('ver_descripcion', compact("descripcion"));
+    }
 }

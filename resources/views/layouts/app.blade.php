@@ -8,6 +8,7 @@
     <title>
         @yield('title','Tickets-dashboard')
     </title>
+    @yield('styles')
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return view('crear_ticket');
     })->name('crear_ticket');
 
+    Route::get('/ver-descripcion-ticket/{ticket}',[TicketController::class,"verDescripcion"])->name('ver_descripcion');
+
     Route::post("/crear-ticket",[TicketController::class,"create"])->name('create_ticket');
     
 });

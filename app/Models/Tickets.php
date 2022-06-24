@@ -16,11 +16,11 @@ class Tickets extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id', 'id');
+        return $this->belongsTo(User::class, 'usuario_id', 'id');
     }
 
     public function estatus()
     {
-        return $this->belongsTo(Estatus::class, 'estatus_id', 'id');
+        return $this->belongsTo(EstatusTicket::class, 'estatus_ticket_id', 'id');
     }
 }

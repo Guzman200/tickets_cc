@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
            
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('estatus_ticket_id');
-            $table->string('solicitud');
+            $table->text('descripcion');
             $table->timestamps();
 
             $table->foreign('usuario_id')

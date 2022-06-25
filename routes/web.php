@@ -25,6 +25,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return view('users');
     })->name('users');
 
+    Route::get('/crear/usuario', function(){
+        return view('crear_usuario');
+    })->name('users.create');
+
     Route::get('/tickets', function(){
         return view('tickets');
     })->name('tickets');

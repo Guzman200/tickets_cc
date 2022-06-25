@@ -7,9 +7,7 @@ use Livewire\Component;
 
 class TablaUsuarios extends Component
 {
-
-    public $crearUsuario = false;
-
+    
     public function render()
     {
 

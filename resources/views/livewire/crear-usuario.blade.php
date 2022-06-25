@@ -32,7 +32,7 @@
                             <select class="form-control custom-select" id="exampleFormControlSelect1">
                                 <option value="">Selecciona el tipo de usuario</option>
                                 @foreach ($tipos_usuarios as $tipo)
-                                    <option value="{{$tipo->id}}">{{$tipo->tipo}}</option>
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -42,21 +42,26 @@
                             <select class="form-control custom-select" id="exampleFormControlSelect1">
                                 <option value="">Selecciona el area</option>
                                 @foreach ($areas as $area)
-                                    <option value="{{$area->id}}">{{$area->area}}</option>
+                                    <option value="{{ $area->id }}">{{ $area->area }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="button">
-                            Crear usuario
-                        </button>
+                <div class="row d-flex justify-content-end">
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <button class=" btn btn-primary" type="button">
+                                Crear usuario
+                            </button>
+                            <button wire:click="" class=" btn btn-danger" type="button">
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
                 </div>
-                {{--
-                <div class="row">
+        </div>
+        {{-- <div class="row">
                     <div class="col-md-6">
                         <div class="input-group input-group-outline is-valid my-3">
                             <label class="form-label">Success</label>
@@ -69,9 +74,8 @@
                             <input type="email" class="form-control">
                         </div>
                     </div>
-                </div>
-                --}}
-            </form>
-        </div>
+                </div> --}}
+        </form>
     </div>
+</div>
 </div>

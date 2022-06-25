@@ -6,30 +6,30 @@
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
                             <label class="form-label">Nombres</label>
-                            <input type="email" class="form-control">
+                            <input wire:model="nombres" type="email" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
                             <label class="form-label">Apellidos</label>
-                            <input type="email" class="form-control">
+                            <input wire:model="apellidos" type="email" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control">
+                            <input wire:model="email" type="email" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
                             <label class="form-label">Contraseña</label>
-                            <input type="password" class="form-control">
+                            <input wire:model="password" type="password" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
-                            <select class="form-control custom-select" id="exampleFormControlSelect1">
+                            <select wire:model="tipo_usuario_id" class="form-control custom-select" id="exampleFormControlSelect1">
                                 <option value="">Selecciona el tipo de usuario</option>
                                 @foreach ($tipos_usuarios as $tipo)
                                     <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-outline my-3">
-                            <select class="form-control custom-select" id="exampleFormControlSelect1">
+                            <select wire:model="area_id" class="form-control custom-select" id="exampleFormControlSelect1">
                                 <option value="">Selecciona el area</option>
                                 @foreach ($areas as $area)
                                     <option value="{{ $area->id }}">{{ $area->area }}</option>
@@ -51,12 +51,12 @@
                 <div class="row d-flex justify-content-end">
                     <div class="col-12 col-md-12">
                         <div class="form-group">
-                            <button class=" btn btn-primary" type="button">
+                            <button wire:click="crear()" class=" btn btn-primary" type="button">
                                 Crear usuario
                             </button>
-                            <button wire:click="" class=" btn btn-danger" type="button">
+                            <a href="{{route('users')}}" class=" btn btn-danger" type="button">
                                 Cancelar
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -3,13 +3,14 @@
 
         <div class="row mt-3 mb-3">
             <div class="col-12 col-sm-3">
-                <a href="{{route('users.create')}}" class="btn btn-primary" style="margin-left : 10px">
+                <a href="{{ route('users.create') }}" class="btn btn-primary" style="margin-left : 10px">
                     Crear usuario
                 </a>
             </div>
         </div>
 
         <div class="table-responsive">
+
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
@@ -58,6 +59,14 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-center">
+
+                {{ $users->links() }}
+
+            </div>
         </div>
+
+
     </div>
 </div>

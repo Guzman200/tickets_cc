@@ -7,7 +7,7 @@
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
             target="_blank">
             <img src="{{ asset('template/assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+            <span class="ms-1 font-weight-bold text-white">App Tickets Naturafrut</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -24,7 +24,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'users' ? 'active' : ''}}" href="{{route('users')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
+                        <i class="material-icons opacity-10">people_alt</i>
                     </div>
                     <span class="nav-link-text ms-1">Usuarios</span>
                 </a>
@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'tickets' ? 'active' : ''}}" href="{{route('tickets')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
+                        <i class="material-icons opacity-10">speaker_notes</i>
                     </div>
                     <span class="nav-link-text ms-1">Tickets</span>
                 </a>
@@ -40,14 +40,14 @@
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'crear_ticket' ? 'active' : ''}}" href="{{route('crear_ticket')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
+                        <i class="material-icons opacity-10">note_add</i>
                     </div>
                     <span class="nav-link-text ms-1">Crear ticket</span>
                 </a>
             </li>
         </ul>
     </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+    {{--<div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
             <a class="btn bg-gradient-primary mt-4 w-100"
                 href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">
@@ -55,4 +55,5 @@
             </a>
         </div>
     </div>
+    --}}
 </aside>

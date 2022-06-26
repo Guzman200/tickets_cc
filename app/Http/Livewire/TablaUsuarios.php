@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,6 +32,11 @@ class TablaUsuarios extends Component
                         ->paginate(15);
         }else{
             $users = User::paginate(15);
+        }
+
+        foreach($users as $user){
+            $date = Carbon::parse($user->created_at);
+            $user->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
         }
 
         return view('livewire.tabla-usuarios', compact('users'));

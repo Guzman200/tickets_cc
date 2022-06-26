@@ -62,7 +62,7 @@
                                 {{$user->tickets->count()}}
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-normal">{{ $user->created_at }}</span>
+                                <span class="text-secondary text-xs font-weight-normal">{{ $user->fecha_registro }}</span>
                             </td>
                             <td class="align-middle">
                                 <button type="button" class="btn btn-info btn-sm">Editar</button>

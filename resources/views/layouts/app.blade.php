@@ -73,7 +73,7 @@
         </div>
     </main>
 
-    @include('include.settings')
+    {{--@include('include.settings')--}}
 
     @include('include.scripts')
 

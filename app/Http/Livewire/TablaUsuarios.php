@@ -41,4 +41,14 @@ class TablaUsuarios extends Component
 
         return view('livewire.tabla-usuarios', compact('users'));
     }
+
+    public function cambiarEstatus($user_id)
+    {
+
+        $user = User::findOrFail($user_id);
+        
+        $user->estatus = !$user->estatus;
+
+        $user->update();
+    }
 }

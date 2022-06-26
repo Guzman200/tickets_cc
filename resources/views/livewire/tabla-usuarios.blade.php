@@ -6,7 +6,8 @@
             <form>
                 <div class="input-group input-group-static mb-4">
                     <label>Buscar</label>
-                    <input wire:model="search" type="search" class="form-control" placeholder="Nombre | Apellido | Email | Area | Tipo de usuario">
+                    <input wire:model="search" type="search" class="form-control"
+                        placeholder="Nombre | Apellido | Email | Area | Tipo de usuario">
                 </div>
             </form>
 
@@ -59,14 +60,26 @@
                                 <p class="text-xs text-secondary mb-0">{{ $user->tipoUsuario->tipo }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                {{$user->tickets->count()}}
+                                {{ $user->tickets->count() }}
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-normal">{{ $user->fecha_registro }}</span>
+                                <span
+                                    class="text-secondary text-xs font-weight-normal">{{ $user->fecha_registro }}</span>
                             </td>
                             <td class="align-middle">
                                 <button type="button" class="btn btn-info btn-sm">Editar</button>
-                                <button type="button" class="btn btn-primary btn-sm">Desactivar</button>
+                                @if ($user->estatus == 1)
+                                    <button wire:click="cambiarEstatus({{ $user->id }})" type="button"
+                                        class="btn btn-primary btn-sm">
+                                        Desactivado
+                                    </button>
+                                @endif
+                                @if ($user->estatus == 0)
+                                    <button wire:click="cambiarEstatus({{ $user->id }})" type="button"
+                                        class="btn btn-success btn-sm">
+                                        Activo
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -93,3 +106,4 @@
 
     </div>
 </div>
+

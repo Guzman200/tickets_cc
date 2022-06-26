@@ -1,8 +1,22 @@
 <div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <form>
+                <div class="input-group input-group-static mb-4">
+                    <label>Buscar</label>
+                    <input wire:model="search" type="search" class="form-control" placeholder="Nombre | Apellido | Email | Area | Tipo de usuario">
+                </div>
+            </form>
+
+        </div>
+    </div>
+
     <div class="card">
 
         <div class="row mt-3 mb-3">
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-md-3">
                 <a href="{{ route('users.create') }}" class="btn btn-primary" style="margin-left : 10px">
                     Crear usuario
                 </a>
@@ -25,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @forelse ($users as $user)
                         <tr>
                             <td>
                                 <div class="d-flex px-2 py-1">
@@ -45,18 +59,27 @@
                                 <p class="text-xs text-secondary mb-0">{{ $user->tipoUsuario->tipo }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                100
+                                {{$user->tickets->count()}}
                             </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-normal">{{ $user->created_at }}</span>
                             </td>
                             <td class="align-middle">
-                                <button type="button" class="btn btn-primary btn-sm">Editar</button>
-                                <button type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                                <button type="button" class="btn btn-info btn-sm">Editar</button>
                                 <button type="button" class="btn btn-primary btn-sm">Desactivar</button>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+
+                        <tr class="text-center">
+                            <td colspan="5">
+                                <p class="text-xs font-weight-bold mb-0">
+                                    No hay registros
+                                </p>
+                            </td>
+                        </tr>
+
+                    @endforelse
                 </tbody>
             </table>
 

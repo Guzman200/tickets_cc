@@ -58,8 +58,18 @@ class User extends Authenticatable
         return $this->belongsTo(Area::class, 'area_id', 'id');
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Tickets::class, 'usuario_id', 'id');
+    }
+
+
+    /** Metodos */
+
     public function esAdmin()
     {
         return $this->tipo_usuario_id == 1 ? true : false;
     }
+
+     
 }

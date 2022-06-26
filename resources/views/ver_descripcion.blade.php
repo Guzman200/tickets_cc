@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page', 'Descripción tickets')
+
 @section('styles')
    <link rel="stylesheet" href="{{ mix('css/contents.css') }}">
 @endsection

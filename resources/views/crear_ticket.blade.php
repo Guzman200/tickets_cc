@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page', 'Crear ticket')
+
 @section('content')
    @livewireStyles
       <h2>Crear Tickets</h2>

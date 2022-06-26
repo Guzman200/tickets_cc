@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page', 'Crear usuario')
+
 @section('content')
    @livewireStyles
 

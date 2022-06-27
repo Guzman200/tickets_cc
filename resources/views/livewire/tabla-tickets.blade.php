@@ -13,6 +13,8 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Fecha en que se realizo</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             acciones</th>
                         <th class="text-secondary opacity-7"></th>
                     </tr>
@@ -48,6 +50,10 @@
 
                             </td>
                             <td class="align-middle text-center">
+                                <span
+                                    class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>
+                            </td>
+                            <td class="align-middle text-center">
                                 <a href="{{ route('ver_descripcion', ['ticket' => $ticket->id]) }}"
                                     class="btn bg-gradient-primary">
                                     Ver Descripción
@@ -69,6 +75,12 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <div class="d-flex justify-content-center">
+
+            {{ $tickets->links() }}
+
         </div>
     </div>
 </div>

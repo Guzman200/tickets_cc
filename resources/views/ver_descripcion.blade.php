@@ -25,7 +25,8 @@
                             Solicitante</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
-                        <th class="text-secondary opacity-7"></th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Fecha en que se realizo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,10 @@
                                 <span class="badge bg-gradient-success">{{ $ticket->estatus->estatus }}</span>
                             @endif
 
+                        </td>
+                        <td class="align-middle text-center">
+                            <span
+                                class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>
                         </td>
                     </tr>
 

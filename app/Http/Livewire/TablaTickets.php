@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\EstatusTicket;
 use App\Models\Tickets;
 use App\Models\User;
 use Carbon\Carbon;
@@ -64,8 +65,15 @@ class TablaTickets extends Component
             $date = Carbon::parse($ticket->created_at);
             $ticket->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
         }
+
+        $estatusTickets = EstatusTicket::get();
         
 
-        return view('livewire.tabla-tickets', compact('tickets'));
+        return view('livewire.tabla-tickets', compact('tickets', 'estatusTickets'));
+    }
+
+    public function cambiarEstatus($ticket_id, $estatus_id)
+    {
+        Tickets::findOrFail($ticket_id)->update(['estatus_ticket_id' => $estatus_id]);
     }
 }

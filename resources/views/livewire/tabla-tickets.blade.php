@@ -1,6 +1,6 @@
 <div>
 
-    {{$fecha}}
+    {{ $fecha }}
 
     <div class="card mb-4">
         <div class="card-body">
@@ -38,6 +38,10 @@
                             Solicitante</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
+                        @if(auth()->user()->esAdmin())
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Editar estatus</th>
+                        @endif
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Fecha en que se realizo</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -74,8 +78,21 @@
                                 @if ($ticket->estatus->id == 3)
                                     <span class="badge bg-gradient-success">{{ $ticket->estatus->estatus }}</span>
                                 @endif
-
                             </td>
+                            @if(auth()->user()->esAdmin())
+                            <td>
+                                <div class="input-group input-group-static mb-4">
+                                    <label for="exampleFormControlSelect1" class="ms-0"></label>
+                                    <select wire:change="cambiarEstatus({{$ticket->id}}, $event.target.value)" class="form-control" id="exampleFormControlSelect1">
+                                        @foreach ($estatusTickets as $item)
+                                            <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
+                                                value="{{$item->id}}">{{$item->estatus}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </td>
+                            @endif
                             <td class="align-middle text-center">
                                 <span
                                     class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>

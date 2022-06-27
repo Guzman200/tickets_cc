@@ -28,8 +28,6 @@ class TicketController extends Controller
 
     public function verDescripcion(Request $request, Tickets $ticket)
     {
-
-        $descripcion = $ticket->descripcion;
-        return view('ver_descripcion', compact("descripcion"));
+        return view('ver_descripcion', compact("ticket"));
     }
 }

@@ -9,7 +9,7 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Area
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Nombre</th>
+                            Solicitante</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -29,7 +29,8 @@
                             </td>
 
                             <td class="align-middle text-center text-sm">
-                                <h6 class="mb-0 text-xs">{{ $ticket->usuario->nombres }}</h6>
+                                <h6 class="mb-0 text-xs">{{ $ticket->usuario->nombres }} {{ $ticket->usuario->apellidos }}</h6>
+                                <p class="text-xs text-secondary mb-0">{{ $ticket->usuario->email }}</p>
                             </td>
 
                             <td class="align-middle text-center text-sm">

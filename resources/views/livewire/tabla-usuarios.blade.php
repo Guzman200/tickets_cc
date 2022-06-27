@@ -67,7 +67,7 @@
                                     class="text-secondary text-xs font-weight-normal">{{ $user->fecha_registro }}</span>
                             </td>
                             <td class="align-middle">
-                                <button type="button" class="btn btn-info btn-sm">Editar</button>
+                                <a href="{{route('users.edit', ['usuario' => $user->id])}}" type="button" class="btn btn-info btn-sm">Editar</a>
                                 @if ($user->estatus == 1)
                                     <button wire:click="cambiarEstatus({{ $user->id }})" type="button"
                                         class="btn btn-primary btn-sm">

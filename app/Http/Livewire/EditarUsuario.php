@@ -6,15 +6,17 @@ use App\Models\Area;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-class CrearUsuario extends Component
+class EditarUsuario extends Component
 {
 
+    public $user_id;
     public $nombres;
     public $apellidos;
     public $email;
-    public $password;
+    public $password = "";
     public $tipo_usuario_id;
     public $area_id;
 
@@ -24,20 +26,16 @@ class CrearUsuario extends Component
         $tipos_usuarios = TipoUsuario::get();
         $areas = Area::get();
 
-        return view('livewire.crear-usuario', compact('tipos_usuarios', 'areas'));
+        return view('livewire.editar-usuario', compact('tipos_usuarios', 'areas'));
     }
 
-    public function crear()
-    {
-
-        //$this->resetErrorBag();
-        //$this->resetValidation();
+    public function editar(){
 
         $validatedData = $this->validate([
             'nombres'         => 'required',
             'apellidos'       => 'required',
-            'email'           => 'required|email|unique:users',
-            'password'        => 'required|min:5',
+            'email'           => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user_id)],
+            'password'        => 'nullable|min:5',
             'tipo_usuario_id' => 'required',
             'area_id'         => 'required',
         ], [], [
@@ -46,12 +44,12 @@ class CrearUsuario extends Component
             'area_id' => 'area'
         ]);
 
-        $validatedData['password'] = Hash::make($this->password);
+        if($this->password != ""){
+            $validatedData['password'] = Hash::make($this->password);
+        }
 
-        User::create($validatedData);
-
-        $this->reset(['nombres', 'apellidos', 'email', 'password', 'tipo_usuario_id', 'area_id']);
+        User::findOrFail($this->user_id)->update($validatedData);
         
-        session()->flash('usuario_creado', 'Usuario creado correctamente');
+        session()->flash('usuario_editado', 'Usuario editado correctamente');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TicketController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/crear/usuario', function(){
         return view('crear_usuario');
     })->name('users.create');
+
+    Route::get('/editar/usuario/{usuario}', function(User $usuario){
+        return view('editar_usuario', compact('usuario'));
+    })->name('users.edit');
 
     Route::get('/tickets', function(){
         return view('tickets');

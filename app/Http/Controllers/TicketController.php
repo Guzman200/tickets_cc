@@ -8,22 +8,26 @@ use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $validated = $request->validate([
             'descripcion' => 'required',
         ]);
         $user = Auth()->user();
 
-        Tickets::create([
+        $ticket = Tickets::create([
             'usuario_id' => $user->id,
             'estatus_ticket_id' => 1,
-            'descripcion' => $request->descripcion 
+            'descripcion' => $request->descripcion
         ]);
 
-        return redirect('tickets')->with('creacion_ticket_status', 'Ticket Creado con Exito!');
+        $mensaje = "Ticket creado con exito, el folio de tu ticket es " . $ticket->id;
+
+        return redirect('tickets')->with('creacion_ticket_status', $mensaje);
     }
 
-    public function verDescripcion(Request $request, Tickets $ticket){
+    public function verDescripcion(Request $request, Tickets $ticket)
+    {
 
         $descripcion = $ticket->descripcion;
         return view('ver_descripcion', compact("descripcion"));

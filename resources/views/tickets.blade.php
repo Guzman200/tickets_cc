@@ -8,7 +8,7 @@
     @if (session('creacion_ticket_status'))
         <div class="alert alert-success alert-dismissible fade show text-light" role="alert">
 
-            <span class="alert-text"><strong>Exitoso! </strong>{{ session('creacion_ticket_status') }}</span>
+            <span class="alert-text"><strong>{{ session('creacion_ticket_status') }}</strong></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

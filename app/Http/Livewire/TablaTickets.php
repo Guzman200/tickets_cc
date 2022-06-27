@@ -58,7 +58,7 @@ class TablaTickets extends Component
             
         }
 
-        $tickets = $tickets->paginate(15);
+        $tickets = $tickets->orderBy('tickets.id', 'DESC')->paginate(15);
 
         foreach($tickets as $ticket){
             $date = Carbon::parse($ticket->created_at);

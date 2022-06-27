@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Tickets;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,22 +16,49 @@ class TablaTickets extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $search = "";
+    public $fecha  = "";
+
     public function render()
     {
-        $user = User::findOrFail(Auth()->user()->id);
 
-        if ($user->esAdmin()) {
+        $tickets = Tickets::with(['usuario','usuario.area','estatus']);
 
-            $tickets = Tickets::with(['usuario','usuario.area','estatus'])->paginate(15);
-            
-        }else{
-            $tickets = Tickets::with(['usuario','usuario.area','estatus'])
-                ->where(function ($query) use ($user) {
-                    $query->whereHas('usuario', function ($query) use ($user) {
-                        $query->where('usuario_id', $user->id);
+        if($this->search != ""){
+
+            $search = $this->search;
+
+            $tickets = $tickets->where(function($query) use ($search){
+
+                $query->where('id', 'like', "%{$search}%")
+                    ->orWhereHas('usuario.area', function($query) use ($search){
+                        $query->where('area', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('usuario', function($query) use ($search){
+                        $query->where('nombres', 'like', "%{$search}%")
+                            ->orWhere('apellidos', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('estatus', function($query) use ($search){
+                        $query->where('estatus', 'like', "%{$search}%");
                     });
-                })->paginate(15);
+            });
+
         }
+
+        if($this->fecha != ""){
+
+            $tickets = $tickets->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m-%d') = ?", [$this->fecha]);
+
+        }
+
+        if (!auth()->user()->esAdmin()) {
+
+            $tickets = $tickets->where('usuario_id', auth()->user()->id);
+            
+        }
+
+        $tickets = $tickets->paginate(15);
 
         foreach($tickets as $ticket){
             $date = Carbon::parse($ticket->created_at);

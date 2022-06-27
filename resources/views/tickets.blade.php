@@ -4,7 +4,7 @@
 
 @section('content')
     @livewireStyles
-    <h2>Tickets</h2>
+    
     @if (session('creacion_ticket_status'))
         <div class="alert alert-success alert-dismissible fade show text-light" role="alert">
 

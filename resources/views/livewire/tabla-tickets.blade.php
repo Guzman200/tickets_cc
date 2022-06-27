@@ -1,10 +1,36 @@
 <div>
+
+    {{$fecha}}
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="input-group input-group-static mb-4">
+                            <label>Buscar</label>
+                            <input wire:model="search" type="search" class="form-control"
+                                placeholder="Folio | Area | Solicitante | Estatus">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="input-group input-group-static mb-4">
+                            <label>Fecha del ticket</label>
+                            <input wire:model="fecha" type="date" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="card">
         <div class="table-responsive">
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Folio
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Folio
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Area
                         </th>
@@ -13,7 +39,7 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Fecha en que se realizo</th>
+                            Fecha en que se realizo</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             acciones</th>
                         <th class="text-secondary opacity-7"></th>
@@ -31,7 +57,8 @@
                             </td>
 
                             <td class="align-middle text-center text-sm">
-                                <h6 class="mb-0 text-xs">{{ $ticket->usuario->nombres }} {{ $ticket->usuario->apellidos }}</h6>
+                                <h6 class="mb-0 text-xs">{{ $ticket->usuario->nombres }}
+                                    {{ $ticket->usuario->apellidos }}</h6>
                                 <p class="text-xs text-secondary mb-0">{{ $ticket->usuario->email }}</p>
                             </td>
 

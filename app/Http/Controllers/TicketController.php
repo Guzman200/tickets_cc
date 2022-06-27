@@ -30,6 +30,16 @@ class TicketController extends Controller
     public function verDescripcion(Request $request, Tickets $ticket)
     {
 
+        // Si el usuario no es administrador
+        if(!auth()->user()->esAdmin()){
+
+            // Verificamos que el ticket sea del usuario en sesion
+            if( !($ticket->usuario_id == auth()->user()->id)){
+                abort(404);
+            }
+
+        }
+
         $date = Carbon::parse($ticket->created_at);
         $ticket->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
 

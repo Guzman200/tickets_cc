@@ -68,13 +68,13 @@
                             </td>
                             <td class="align-middle">
                                 <a href="{{route('users.edit', ['usuario' => $user->id])}}" type="button" class="btn btn-info btn-sm">Editar</a>
-                                @if ($user->estatus == 1)
+                                @if ($user->estatus == 0)
                                     <button wire:click="cambiarEstatus({{ $user->id }})" type="button"
                                         class="btn btn-primary btn-sm">
                                         Desactivado
                                     </button>
                                 @endif
-                                @if ($user->estatus == 0)
+                                @if ($user->estatus == 1)
                                     <button wire:click="cambiarEstatus({{ $user->id }})" type="button"
                                         class="btn btn-success btn-sm">
                                         Activo

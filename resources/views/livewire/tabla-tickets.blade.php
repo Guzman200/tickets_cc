@@ -85,9 +85,21 @@
                                     <label for="exampleFormControlSelect1" class="ms-0"></label>
                                     <select wire:change="cambiarEstatus({{$ticket->id}}, $event.target.value)" class="form-control" id="exampleFormControlSelect1">
                                         @foreach ($estatusTickets as $item)
-                                            <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
-                                                value="{{$item->id}}">{{$item->estatus}}
-                                            </option>
+                                            @if ($ticket->estatus->id <= $item->id)
+                                                @if ($item->id == 1 || $item->id <=2)
+                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
+                                                    value="{{$item->id}}">{{$item->estatus}}
+                                                    </option>
+                                                @endif
+                                                @if ($ticket->estatus->id >= 2 && $item->id !=2)
+                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
+                                                        value="{{$item->id}}">{{$item->estatus}}
+                                                    </option>
+                                                @endif
+                                            @endif
+
+                                            
+                                           
                                         @endforeach
                                     </select>
                                 </div>

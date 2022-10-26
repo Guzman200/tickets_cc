@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Area;
+use App\Models\Empresa;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -16,15 +17,15 @@ class CrearUsuario extends Component
     public $email;
     public $password;
     public $tipo_usuario_id;
-    public $area_id;
+    public $empresa_id;
 
     public function render()
     {
 
         $tipos_usuarios = TipoUsuario::get();
-        $areas = Area::get();
+        $empresas = Empresa::get();
 
-        return view('livewire.crear-usuario', compact('tipos_usuarios', 'areas'));
+        return view('livewire.crear-usuario', compact('tipos_usuarios', 'empresas'));
     }
 
     public function crear()
@@ -39,18 +40,18 @@ class CrearUsuario extends Component
             'email'           => 'required|email|unique:users',
             'password'        => 'required|min:5',
             'tipo_usuario_id' => 'required',
-            'area_id'         => 'required',
+            'empresa_id'         => 'required',
         ], [], [
             'password' => 'contraseña',
             'tipo_usuario_id' => 'tipo de usuario',
-            'area_id' => 'area'
+            'empresa_id' => 'empresa'
         ]);
 
         $validatedData['password'] = Hash::make($this->password);
 
         User::create($validatedData);
 
-        $this->reset(['nombres', 'apellidos', 'email', 'password', 'tipo_usuario_id', 'area_id']);
+        $this->reset(['nombres', 'apellidos', 'email', 'password', 'tipo_usuario_id', 'empresa_id']);
         
         session()->flash('usuario_creado', 'Usuario creado correctamente');
     }

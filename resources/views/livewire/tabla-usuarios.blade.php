@@ -7,7 +7,7 @@
                 <div class="input-group input-group-static mb-4">
                     <label>Buscar</label>
                     <input wire:model="search" type="search" class="form-control"
-                        placeholder="Nombre | Apellido | Email | Area | Tipo de usuario">
+                        placeholder="Nombre | Apellido | Email | Empresa | Tipo de usuario">
                 </div>
             </form>
 

@@ -69,15 +69,15 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <div class="input-group input-group-static my-3 @error('area_id') is-invalid @enderror">
-                            <select wire:model.lazy="area_id" class="form-control custom-select">
-                                <option value="">Selecciona el area</option>
-                                @foreach ($areas as $area)
-                                    <option value="{{ $area->id }}">{{ $area->area }}</option>
+                        <div class="input-group input-group-static my-3 @error('empresa_id') is-invalid @enderror">
+                            <select wire:model.lazy="empresa_id" class="form-control custom-select">
+                                <option value="">Selecciona la empresa</option>
+                                @foreach ($empresas as $empresa)
+                                    <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        @error('area_id')
+                        @error('empresa_id')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>

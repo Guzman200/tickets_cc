@@ -11,7 +11,7 @@
     'apellidos' => $usuario->apellidos,
     'email' => $usuario->email,
     'tipo_usuario_id' => $usuario->tipo_usuario_id,
-    'area_id' => $usuario->area_id
+    'empresa_id' => $usuario->empresa_id
     ])
 
     @livewireScripts

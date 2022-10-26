@@ -22,15 +22,15 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('estatus')->default(1);
             $table->unsignedBigInteger('tipo_usuario_id');
-            $table->unsignedBigInteger('area_id');
+            $table->unsignedBigInteger('empresa_id');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('tipo_usuario_id')
                 ->references('id')->on('tipos_usuario');
             
-            $table->foreign('area_id')
-                ->references('id')->on('areas');
+            $table->foreign('empresa_id')
+                ->references('id')->on('empresas');
         });
     }
 

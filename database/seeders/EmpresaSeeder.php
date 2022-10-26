@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Area;
+use App\Models\Empresa;
 use Illuminate\Database\Seeder;
 
-class AreaSeeder extends Seeder
+class EmpresaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class AreaSeeder extends Seeder
      */
     public function run()
     {
-        Area::create(['area' => 'Contabilidad']);
-        Area::create(['area' => 'Recursos humanos']);
+        Empresa::create(['nombre' => 'Peñafiel']);
+        Empresa::create(['nombre' => 'Coca Cola']);
     }
 }

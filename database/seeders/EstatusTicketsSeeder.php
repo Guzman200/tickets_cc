@@ -15,8 +15,8 @@ class EstatusTicketsSeeder extends Seeder
      */
     public function run()
     {
-        EstatusTicket::create(['estatus' => 'Ticket Nuevo']);
-        EstatusTicket::create(['estatus' => 'Proceso']);
-        EstatusTicket::create(['estatus' => 'Finalizado']);
+        EstatusTicket::create(['estatus' => 'Abierto']);
+        EstatusTicket::create(['estatus' => 'En proceso']);
+        EstatusTicket::create(['estatus' => 'Atendido']);
     }
 }

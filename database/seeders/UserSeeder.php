@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'my.rg.developer@gmail.com',
             'password' => Hash::make('12345'),
             'tipo_usuario_id' => 1,
-            'area_id' => 1
+            'empresa_id' => 1
         ]);
 
         User::create([
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'beto@gmail.com',
             'password' => Hash::make('12345'),
             'tipo_usuario_id' => 1,
-            'area_id' => 2
+            'empresa_id' => 2
         ]);
     }
 }

@@ -23,8 +23,8 @@ class TablaUsuarios extends Component
             $search = $this->search;
             $users = User::where('nombres', 'like', "%{$this->search}%")->orWhere('apellidos', 'like', "%{$this->search}%")
                         ->orWhere('email', 'like', "%{$this->search}%")
-                        ->orWhereHas('area', function($query) use ($search) {
-                            $query->where('area', 'like', "%{$search}%");
+                        ->orWhereHas('empresa', function($query) use ($search) {
+                            $query->where('nombre', 'like', "%{$search}%");
                         })
                         ->orWhereHas('tipoUsuario', function($query) use ($search) {
                             $query->where('tipo', 'like', "%{$search}%");

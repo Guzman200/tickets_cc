@@ -30,7 +30,7 @@
                 <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Empresa
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Tickets creados</th>
@@ -56,7 +56,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->area->area }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->empresa->nombre }}</p>
                                 <p class="text-xs text-secondary mb-0">{{ $user->tipoUsuario->tipo }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">

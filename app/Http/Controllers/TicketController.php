@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tickets;
+use App\Models\TipoFormulario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
-    public function create(Request $request)
+
+    /**
+     * Seleccionar el tipo de formulario para el ticket
+     * 
+     * @return view
+     */
+    public function selectTipoFormulario()
     {
-        $validated = $request->validate([
-            'descripcion' => 'required',
-        ]);
-        $user = Auth()->user();
 
-        $ticket = Tickets::create([
-            'usuario_id' => $user->id,
-            'estatus_ticket_id' => 1,
-            'descripcion' => $request->descripcion
-        ]);
+        $tiposFormularios = TipoFormulario::where('empresa_id', auth()->user()->empresa_id)->get();
 
-        $mensaje = "Ticket creado con exito, el folio de tu ticket es " . $ticket->id;
+        return view('ticket.selecciona_formulario', compact('tiposFormularios'));
 
-        return redirect('tickets')->with('creacion_ticket_status', $mensaje);
+    }
+
+    public function crear(TipoFormulario $tipoFormulario)
+    {
+        return view('ticket.crear', compact('tipoFormulario'));   
     }
 
     public function verDescripcion(Request $request, Tickets $ticket)

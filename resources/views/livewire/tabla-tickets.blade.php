@@ -32,10 +32,16 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Folio
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Area
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Empresa
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Solicitante</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Asignar a 
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Asignado a 
+                        </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
                         @if(auth()->user()->esAdmin())
@@ -52,18 +58,59 @@
                 <tbody>
                     @forelse ($tickets as $ticket)
                         <tr>
+
+                            {{-- FOLIO --}}
                             <td class="align-middle text-center text-sm">
                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->id }}</p>
                             </td>
 
+                            {{-- EMPRESA --}}
                             <td class="align-middle text-center text-sm">
-                                <p class="text-xs font-weight-bold mb-0">{{ $ticket->usuario->area->area }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $ticket->empresa->nombre }}</p>
                             </td>
 
+                            {{-- NOMBRE DE QUIEN HIZO LA SOLICITUD --}}
                             <td class="align-middle text-center text-sm">
-                                <h6 class="mb-0 text-xs">{{ $ticket->usuario->nombres }}
-                                    {{ $ticket->usuario->apellidos }}</h6>
-                                <p class="text-xs text-secondary mb-0">{{ $ticket->usuario->email }}</p>
+                                <h6 class="mb-0 text-xs">{{ $ticket->usuarioSolicita->nombres }}
+                                    {{ $ticket->usuarioSolicita->apellidos }}</h6>
+                                <p class="text-xs text-secondary mb-0">{{ $ticket->usuarioSolicita->email }}</p>
+                            </td>
+
+                            {{-- SELECCIONAR QUIEN VA A ATENDER EL TICKET --}}
+                            <td>
+                                <div class="input-group input-group-static mb-4">
+                                    <label for="exampleFormControlSelect1" class="ms-0"></label>
+                                    <select wire:change="cambiarEstatus({{$ticket->id}}, $event.target.value)" class="form-control" id="exampleFormControlSelect1">
+                                        @foreach ($estatusTickets as $item)
+                                            @if ($ticket->estatus->id <= $item->id)
+                                                @if ($item->id == 1 || $item->id <=2)
+                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
+                                                    value="{{$item->id}}">{{$item->estatus}}
+                                                    </option>
+                                                @endif
+                                                @if ($ticket->estatus->id >= 2 && $item->id !=2)
+                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
+                                                        value="{{$item->id}}">{{$item->estatus}}
+                                                    </option>
+                                                @endif
+                                            @endif
+
+                                            
+                                           
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </td>
+
+                            {{-- NOMBRE DE QUIEN ESTA ATENDIENDO EL TICKET --}}
+                            <td class="align-middle text-center text-sm">
+                                @if(isset($ticket->usuarioAsignado))
+                                <h6 class="mb-0 text-xs">{{ $ticket->usuarioAsignado->nombres }}
+                                    {{ $ticket->usuarioAsignado->apellidos }}</h6>
+                                <p class="text-xs text-secondary mb-0">{{ $ticket->usuarioAsignado->email }}</p>
+                                @else
+                                    <h6 class="mb-0 text-xs">Sin asignar</h6>
+                                @endif
                             </td>
 
                             <td class="align-middle text-center text-sm">

@@ -69,7 +69,22 @@ class User extends Authenticatable
 
     public function esAdmin()
     {
-        return $this->tipo_usuario_id == 1 ? true : false;
+        return $this->tipo_usuario_id == 1;
+    }
+
+    public function esUsuario()
+    {
+        return $this->tipo_usuario_id == 2;
+    }
+
+    public function esAgente()
+    {
+        return $this->tipo_usuario_id == 3;
+    }
+
+    public function esAdminCliente()
+    {
+        return $this->tipo_usuario_id == 4;
     }
 
      

@@ -14,13 +14,23 @@ class Tickets extends Model
 
     /** =========== relaciones ============ */
 
-    public function usuario()
+    public function usuarioSolicita()
     {
-        return $this->belongsTo(User::class, 'usuario_id', 'id');
+        return $this->belongsTo(User::class, 'usuario_solicita_id', 'id');
+    }
+
+    public function usuarioAsignado()
+    {
+        return $this->belongsTo(User::class, 'usuario_asignado_id', 'id');
     }
 
     public function estatus()
     {
         return $this->belongsTo(EstatusTicket::class, 'estatus_ticket_id', 'id');
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_id', 'id');
     }
 }

@@ -45,6 +45,7 @@ class CrearTicket extends Component
             $data = $this->validarFormularioIntegracionDePago();
 
             $data['usuario_solicita_id'] = auth()->user()->id;
+            $data['empresa_id'] = auth()->user()->empresa_id;
             $data['estatus_ticket_id']   = 1;
 
             Tickets::create($data);

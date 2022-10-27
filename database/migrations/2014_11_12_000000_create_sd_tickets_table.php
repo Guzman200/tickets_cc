@@ -27,7 +27,9 @@ class CreateSdTicketsTable extends Migration
             $table->float('monto')->nullable();
             $table->unsignedBigInteger('tipo_evidencia_id')->nullable();
             $table->unsignedBigInteger('zona_empresa_id')->nullable();
-            $table->date('fecha_atencion')->nullable();
+            $table->unsignedBigInteger('empresa_id');
+            $table->timestamp('fecha_update_en_proceso')->nullable();
+            $table->timestamp('fecha_update_atendido')->nullable();
             $table->timestamps();
 
             $table->foreign('usuario_solicita_id')
@@ -44,6 +46,9 @@ class CreateSdTicketsTable extends Migration
 
             $table->foreign('zona_empresa_id')
                 ->references('id')->on('sd_zonas_empresa');
+
+            $table->foreign('empresa_id')
+                ->references('id')->on('sd_empresas');
                    
         });
     }

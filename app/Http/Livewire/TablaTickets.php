@@ -23,7 +23,7 @@ class TablaTickets extends Component
     public function render()
     {
 
-        $tickets = Tickets::with(['usuario','usuario.area','estatus']);
+        $tickets = Tickets::with(['usuarioSolicita','estatus']);
 
         if($this->search != ""){
 
@@ -53,13 +53,13 @@ class TablaTickets extends Component
 
         }
 
-        if (!auth()->user()->esAdmin()) {
+        /*if (!auth()->user()->esAdmin()) {
 
             $tickets = $tickets->where('usuario_id', auth()->user()->id);
             
-        }
+        }*/
 
-        $tickets = $tickets->orderBy('tickets.id', 'DESC')->paginate(15);
+        $tickets = $tickets->orderBy('sd_tickets.id', 'DESC')->paginate(15);
 
         foreach($tickets as $ticket){
             $date = Carbon::parse($ticket->created_at);
@@ -74,6 +74,18 @@ class TablaTickets extends Component
 
     public function cambiarEstatus($ticket_id, $estatus_id)
     {
-        Tickets::findOrFail($ticket_id)->update(['estatus_ticket_id' => $estatus_id]);
+        $data = ['estatus_ticket_id' => $estatus_id];
+
+        // Si el estatus es en proceso
+        if($estatus_id == 2){
+            $data = ['estatus_ticket_id' => $estatus_id, 'fecha_update_en_proceso' => Carbon::now()];
+        }
+
+        // Si el estatus es atendido
+        if($estatus_id == 3){
+            $data = ['estatus_ticket_id' => $estatus_id, 'fecha_update_atendido' => Carbon::now()];
+        }
+
+        Tickets::findOrFail($ticket_id)->update($data);
     }
 }

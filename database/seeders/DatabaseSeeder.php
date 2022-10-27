@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EstatusTicketsSeeder::class);
         $this->call(ZonaEmpresaSeeder::class);
         $this->call(TipoEvidenciaSeeder::class);
+        $this->call(TipoFormularioSeeder::class);
     }
 }

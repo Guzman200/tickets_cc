@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Tickets;
 use App\Models\ZonaEmpresa;
+use App\Models\ZonaUsuario;
 use Livewire\Component;
 
 class CrearTicket extends Component
@@ -45,8 +46,9 @@ class CrearTicket extends Component
             $data = $this->validarFormularioIntegracionDePago();
 
             $data['usuario_solicita_id'] = auth()->user()->id;
-            $data['empresa_id'] = auth()->user()->empresa_id;
+            $data['empresa_id']          = auth()->user()->empresa_id;
             $data['estatus_ticket_id']   = 1;
+            $data['usuario_asignado_id'] = $this->getUsuarioAsigandoId();
 
             Tickets::create($data);
 
@@ -68,5 +70,16 @@ class CrearTicket extends Component
         ]);
 
         return $validatedData;
+    }
+
+    public function getUsuarioAsigandoId()
+    {
+        $zonaUsuario = ZonaUsuario::where('zona_empresa_id', $this->zona_empresa_id)->first();
+
+        if($zonaUsuario){
+            return $zonaUsuario->user_id;
+        }
+
+        return NULL;
     }
 }

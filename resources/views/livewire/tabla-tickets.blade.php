@@ -10,7 +10,7 @@
                         <div class="input-group input-group-static mb-4">
                             <label>Buscar</label>
                             <input wire:model="search" type="search" class="form-control"
-                                placeholder="Folio | Area | Solicitante | Estatus">
+                                placeholder="Folio | Solicitante | Asignado A | Estatus">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -37,14 +37,11 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Solicitante</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Asignar a 
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Asignado a 
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Estatus</th>
-                        @if(auth()->user()->esAdmin())
+                        @if(auth()->user()->esAgente())
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Editar estatus</th>
                         @endif
@@ -76,32 +73,6 @@
                                 <p class="text-xs text-secondary mb-0">{{ $ticket->usuarioSolicita->email }}</p>
                             </td>
 
-                            {{-- SELECCIONAR QUIEN VA A ATENDER EL TICKET --}}
-                            <td>
-                                <div class="input-group input-group-static mb-4">
-                                    <label for="exampleFormControlSelect1" class="ms-0"></label>
-                                    <select wire:change="cambiarEstatus({{$ticket->id}}, $event.target.value)" class="form-control" id="exampleFormControlSelect1">
-                                        @foreach ($estatusTickets as $item)
-                                            @if ($ticket->estatus->id <= $item->id)
-                                                @if ($item->id == 1 || $item->id <=2)
-                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
-                                                    value="{{$item->id}}">{{$item->estatus}}
-                                                    </option>
-                                                @endif
-                                                @if ($ticket->estatus->id >= 2 && $item->id !=2)
-                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
-                                                        value="{{$item->id}}">{{$item->estatus}}
-                                                    </option>
-                                                @endif
-                                            @endif
-
-                                            
-                                           
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </td>
-
                             {{-- NOMBRE DE QUIEN ESTA ATENDIENDO EL TICKET --}}
                             <td class="align-middle text-center text-sm">
                                 @if(isset($ticket->usuarioAsignado))
@@ -126,7 +97,7 @@
                                     <span class="badge bg-gradient-success">{{ $ticket->estatus->estatus }}</span>
                                 @endif
                             </td>
-                            @if(auth()->user()->esAdmin())
+                            @if(auth()->user()->esAgente())
                             <td>
                                 <div class="input-group input-group-static mb-4">
                                     <label for="exampleFormControlSelect1" class="ms-0"></label>

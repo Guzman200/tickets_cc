@@ -32,13 +32,18 @@ class TablaTickets extends Component
             $tickets = $tickets->where(function($query) use ($search){
 
                 $query->where('id', 'like', "%{$search}%")
-                    ->orWhereHas('usuario.area', function($query) use ($search){
-                        $query->where('area', 'like', "%{$search}%");
-                    })
-                    ->orWhereHas('usuario', function($query) use ($search){
+                    ->orWhereHas('usuarioSolicita', function($query) use ($search){
                         $query->where('nombres', 'like', "%{$search}%")
                             ->orWhere('apellidos', 'like', "%{$search}%")
                             ->orWhere('email', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('usuarioAsignado', function($query) use ($search){
+                        $query->where('nombres', 'like', "%{$search}%")
+                            ->orWhere('apellidos', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('empresa', function($query) use ($search){
+                        $query->where('nombre', 'like', "%{$search}%");
                     })
                     ->orWhereHas('estatus', function($query) use ($search){
                         $query->where('estatus', 'like', "%{$search}%");
@@ -49,15 +54,27 @@ class TablaTickets extends Component
 
         if($this->fecha != ""){
 
-            $tickets = $tickets->whereRaw("DATE_FORMAT(tickets.created_at, '%Y-%m-%d') = ?", [$this->fecha]);
+            $tickets = $tickets->whereRaw("DATE_FORMAT(sd_tickets.created_at, '%Y-%m-%d') = ?", [$this->fecha]);
 
         }
 
-        /*if (!auth()->user()->esAdmin()) {
+        if (auth()->user()->esCliente()) {
 
-            $tickets = $tickets->where('usuario_id', auth()->user()->id);
+            $tickets = $tickets->where('usuario_solicita_id', auth()->user()->id);
             
-        }*/
+        }
+
+        if (auth()->user()->esAgente()) {
+
+            $tickets = $tickets->where('usuario_asignado_id', auth()->user()->id);
+            
+        }
+
+        if (auth()->user()->esAdminCliente()) {
+
+            $tickets = $tickets->where('empresa_id', auth()->user()->empresa_id);
+            
+        }
 
         $tickets = $tickets->orderBy('sd_tickets.id', 'DESC')->paginate(15);
 

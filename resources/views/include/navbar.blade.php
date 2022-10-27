@@ -7,7 +7,7 @@
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
             target="_blank">
             <img src="{{ asset('template/assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">App Tickets Naturafrut</span>
+            <span class="ms-1 font-weight-bold text-white">App Tickets Collectaglobal</span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -21,6 +21,7 @@
                     <span class="nav-link-text ms-1">Inicio</span>
                 </a>
             </li>
+            @if(auth()->user()->esAdmin())
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'users' ? 'active' : ''}}" href="{{route('users')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -29,6 +30,7 @@
                     <span class="nav-link-text ms-1">Usuarios</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'tickets' ? 'active' : ''}}" href="{{route('tickets')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -37,6 +39,7 @@
                     <span class="nav-link-text ms-1">Tickets</span>
                 </a>
             </li>
+            @if(auth()->user()->esCliente())
             <li class="nav-item">
                 <a class="nav-link text-white {{Route::currentRouteName() == 'crear_ticket' ? 'active' : ''}}" href="{{route('ticket.seleccion_formulario')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -45,6 +48,7 @@
                     <span class="nav-link-text ms-1">Crear ticket</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
     {{--<div class="sidenav-footer position-absolute w-100 bottom-0 ">

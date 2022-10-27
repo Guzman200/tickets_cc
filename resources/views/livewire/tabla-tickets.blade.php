@@ -34,6 +34,8 @@
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Empresa
                         </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo
+                        </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Solicitante</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -64,6 +66,11 @@
                             {{-- EMPRESA --}}
                             <td class="align-middle text-center text-sm">
                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->empresa->nombre }}</p>
+                            </td>
+
+                            {{-- TIPO FORMULARIO --}}
+                            <td class="align-middle text-center text-sm">
+                                <p class="text-xs font-weight-bold mb-0">{{ $ticket->tipoFormulario->nombre }}</p>
                             </td>
 
                             {{-- NOMBRE DE QUIEN HIZO LA SOLICITUD --}}

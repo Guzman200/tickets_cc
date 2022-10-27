@@ -33,4 +33,14 @@ class Tickets extends Model
     {
         return $this->belongsTo(Empresa::class, 'empresa_id', 'id');
     }
+
+    public function zonaEmpresa()
+    {
+        return $this->belongsTo(ZonaEmpresa::class, 'zona_empresa_id', 'id');
+    }
+
+    public function tipoFormulario()
+    {
+        return $this->belongsTo(TipoFormulario::class, 'tipo_formulario_id', 'id');
+    }
 }

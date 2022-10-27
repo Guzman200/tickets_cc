@@ -33,11 +33,28 @@ class TicketController extends Controller
     public function verDescripcion(Request $request, Tickets $ticket)
     {
 
-        // Si el usuario no es administrador
-        if(!auth()->user()->esAdmin()){
+        if(auth()->user()->esAdminCliente()){
 
-            // Verificamos que el ticket sea del usuario en sesion
-            if( !($ticket->usuario_id == auth()->user()->id)){
+            // Verificamos que el ticket sea de la empresa del admin cliente
+            if( !($ticket->empresa_id == auth()->user()->empresa_id)){
+                abort(404);
+            }
+
+        }
+
+        if(auth()->user()->esAgente()){
+
+            // Verificamos que el ticket sea de la empresa del admin cliente
+            if( !($ticket->usuario_asignado_id == auth()->user()->id)){
+                abort(404);
+            }
+
+        }
+
+        if(auth()->user()->esCliente()){
+
+            // Verificamos que el ticket sea de la empresa del admin cliente
+            if( !($ticket->usuario_solicita_id == auth()->user()->id)){
                 abort(404);
             }
 
@@ -45,6 +62,7 @@ class TicketController extends Controller
 
         $date = Carbon::parse($ticket->created_at);
         $ticket->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
+        $ticket->fecha_transferencia = Carbon::parse($ticket->fecha_transferencia)->format('d/m/Y');
 
         return view('ver_descripcion', compact("ticket"));
     }

@@ -19,6 +19,7 @@ class CreateSdTicketsTable extends Migration
             $table->unsignedBigInteger('usuario_solicita_id');
             $table->unsignedBigInteger('usuario_asignado_id')->nullable();
             $table->text('descripcion_solicitud')->nullable();
+            $table->text('comentario_agente')->nullable();
             $table->unsignedBigInteger('estatus_ticket_id');
             $table->string('cpr_bkhl')->nullable();
             $table->string('no_cuenta_deudor')->nullable();
@@ -28,6 +29,7 @@ class CreateSdTicketsTable extends Migration
             $table->unsignedBigInteger('tipo_evidencia_id')->nullable();
             $table->unsignedBigInteger('zona_empresa_id')->nullable();
             $table->unsignedBigInteger('empresa_id');
+            $table->unsignedBigInteger('tipo_formulario_id');
             $table->timestamp('fecha_update_en_proceso')->nullable();
             $table->timestamp('fecha_update_atendido')->nullable();
             $table->timestamps();
@@ -49,6 +51,9 @@ class CreateSdTicketsTable extends Migration
 
             $table->foreign('empresa_id')
                 ->references('id')->on('sd_empresas');
+
+            $table->foreign('tipo_formulario_id')
+                ->references('id')->on('sd_tipos_formularios');
                    
         });
     }

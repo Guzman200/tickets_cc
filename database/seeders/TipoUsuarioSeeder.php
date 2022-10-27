@@ -15,7 +15,7 @@ class TipoUsuarioSeeder extends Seeder
     public function run()
     {
         TipoUsuario::create(['tipo' => 'administrador']);
-        TipoUsuario::create(['tipo' => 'usuario']);
+        TipoUsuario::create(['tipo' => 'cliente']);
         TipoUsuario::create(['tipo' => 'agente']);
         TipoUsuario::create(['tipo' => 'administrador cliente']);
     }

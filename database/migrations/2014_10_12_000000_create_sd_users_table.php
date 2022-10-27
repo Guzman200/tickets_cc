@@ -22,7 +22,7 @@ class CreateSdUsersTable extends Migration
             $table->string('password');
             $table->boolean('estatus')->default(1);
             $table->unsignedBigInteger('tipo_usuario_id');
-            $table->unsignedBigInteger('empresa_id');
+            $table->unsignedBigInteger('empresa_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

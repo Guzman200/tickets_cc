@@ -72,7 +72,7 @@ class User extends Authenticatable
         return $this->tipo_usuario_id == 1;
     }
 
-    public function esUsuario()
+    public function esCliente()
     {
         return $this->tipo_usuario_id == 2;
     }

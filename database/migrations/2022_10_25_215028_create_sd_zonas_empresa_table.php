@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTiposUsuarioTable extends Migration
+class CreateSdZonasEmpresaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateTiposUsuarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_usuario', function (Blueprint $table) {
+        Schema::create('sd_zonas_empresa', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo')->unique();
+            $table->unsignedBigInteger('empresa_id');
+            $table->string('zona');
             $table->timestamps();
+
+            $table->foreign('empresa_id')->references('id')->on('sd_empresas');
+
         });
     }
 
@@ -27,6 +31,6 @@ class CreateTiposUsuarioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_usuario');
+        Schema::dropIfExists('sd_zonas_empresa');
     }
 }

@@ -10,5 +10,5 @@ class Empresa extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = "empresas";
+    protected $table = "sd_empresas";
 }

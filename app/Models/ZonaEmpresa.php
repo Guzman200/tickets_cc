@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoUsuario extends Model
+class ZonaEmpresa extends Model
 {
     use HasFactory;
 
+    protected $table = "sd_zonas_empresa";
+
     protected $guarded = [];
-    protected $table = "sd_tipos_usuario";
 }

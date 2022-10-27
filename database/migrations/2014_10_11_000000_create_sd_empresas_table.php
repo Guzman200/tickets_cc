@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstatusTicketsTable extends Migration
+class CreateSdEmpresasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEstatusTicketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('estatus_tickets', function (Blueprint $table) {
+        Schema::create('sd_empresas', function (Blueprint $table) {
             $table->id();
-            $table->string('estatus')->unique();
+            $table->string('nombre')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateEstatusTicketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estatus_tickets');
+        Schema::dropIfExists('sd_empresas');
     }
 }

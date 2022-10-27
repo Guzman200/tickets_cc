@@ -10,7 +10,7 @@ class Tickets extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = "tickets";
+    protected $table = "sd_tickets";
 
     /** =========== relaciones ============ */
 

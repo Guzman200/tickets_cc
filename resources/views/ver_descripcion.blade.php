@@ -147,6 +147,8 @@
         </div>
     </div>
 
+    @livewire('update-comentario-agente', ['ticket_id' => $ticket->id])
+
     <div class="mt-4">
         <a href="{{ route('tickets') }}" class="btn bg-gradient-primary">
             <i class="fa-solid fa-arrow-left"></i> Regresar

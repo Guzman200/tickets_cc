@@ -22,7 +22,8 @@
             <div class="col-md-12">
                 <div class="input-group input-group-static my-3 @if ($comentario_agente !='' ) is-filled @endif">
                     <label>Realiza un comentario sobre el ticket</label>
-                    <textarea {{$ticket->estatus_ticket_id == 3 ? 'disabled' : ''}} wire:model.lazy="comentario_agente" cols="30" rows="1" class="form-control"></textarea>
+                    <textarea {{$ticket->estatus_ticket_id == 3 ? 'disabled' : ''}} wire:model.lazy="comentario_agente" cols="30" rows="1" class="form-control">
+                    </textarea>
 
                 </div>
                 @error('comentario_agente')
@@ -43,12 +44,10 @@
         <div class="card card-frame">
             <div class="card-body">
 
-               
-
                 {{-- COMENTARIO DEL AGENTE --}}
                 <div class="col-md-12">
                     <div class="input-group input-group-static my-3">
-                        {{$comentario_agente}}
+                        {{$ticket->comentario_agente}}
                     </div>
                 </div>
 

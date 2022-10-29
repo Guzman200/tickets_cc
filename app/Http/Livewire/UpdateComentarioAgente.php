@@ -16,8 +16,6 @@ class UpdateComentarioAgente extends Component
 
         $ticket = Tickets::findOrFail($this->ticket_id);
 
-        $this->comentario_agente = $ticket->comentario_agente;
-
         return view('livewire.update-comentario-agente', compact('ticket'));
     }
 
@@ -32,8 +30,7 @@ class UpdateComentarioAgente extends Component
 
         $ticket = Tickets::findOrFail($this->ticket_id);
 
-        $ticket->comentario_agente = $this->comentario_agente;
-        $ticket->update();
+        $ticket->update($validatedData);
 
         session()->flash('success', 'Cambios guardados exitosamente');
     }

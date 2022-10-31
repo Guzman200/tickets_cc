@@ -37,7 +37,7 @@ class CrearTicket extends Component
     public function render()
     {
 
-        $zonas_empresa    = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->get();
+        $zonas_empresa    = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->orderBy('zona')->get();
         $tipos_evidencias = TipoEvidencia::get();
 
         return view('livewire.crear-ticket', compact('zonas_empresa', 'tipos_evidencias'));

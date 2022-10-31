@@ -44,7 +44,7 @@ class TicketController extends Controller
 
         if(auth()->user()->esAgente()){
 
-            // Verificamos que el ticket sea de la empresa del admin cliente
+            // Verificamos que el ticket lo tenga asignado el agente
             if( !($ticket->usuario_asignado_id == auth()->user()->id)){
                 abort(404);
             }
@@ -53,7 +53,7 @@ class TicketController extends Controller
 
         if(auth()->user()->esCliente()){
 
-            // Verificamos que el ticket sea de la empresa del admin cliente
+            // Verificamos que el ticket alla sido generado por el cliente
             if( !($ticket->usuario_solicita_id == auth()->user()->id)){
                 abort(404);
             }

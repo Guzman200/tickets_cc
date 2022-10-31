@@ -56,7 +56,9 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->empresa->nombre }}</p>
+                                <p class="text-xs font-weight-bold mb-0">
+                                    {{ isset($user->empresa) ? $user->empresa->nombre : '' }}
+                                </p>
                                 <p class="text-xs text-secondary mb-0">{{ $user->tipoUsuario->tipo }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">

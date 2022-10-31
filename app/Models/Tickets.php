@@ -43,4 +43,9 @@ class Tickets extends Model
     {
         return $this->belongsTo(TipoFormulario::class, 'tipo_formulario_id', 'id');
     }
+
+    public function tipoEvidencia()
+    {
+        return $this->belongsTo(TipoEvidencia::class, 'tipo_evidencia_id', 'id');
+    }
 }

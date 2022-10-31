@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Tickets;
+use App\Models\TipoEvidencia;
 use App\Models\ZonaEmpresa;
 use App\Models\ZonaUsuario;
 use Livewire\Component;
@@ -19,6 +20,9 @@ class CrearTicket extends Component
     public $deudor;
     public $fecha_transferencia;    
     public $monto;
+    public $tipo_evidencia_id;
+    public $folios_factura;
+    public $cpr_bkhl;
 
     protected $validationAttributes = [
         'descripcion_solicitud' => 'descripción de la solicitud',
@@ -26,37 +30,60 @@ class CrearTicket extends Component
         'no_cuenta_deudor'      => 'no cuenta deudor',
         'deudor'                => 'deudor',
         'fecha_transferencia'   => 'fecha transferencia',
-        'monto'                 => 'monto'
+        'monto'                 => 'monto',
+        'tipo_evidencia_id'     => 'tipo de evidencia'
     ];
 
     public function render()
     {
 
-        $zonas_empresa = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->get();
+        $zonas_empresa    = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->get();
+        $tipos_evidencias = TipoEvidencia::get();
 
-        return view('livewire.crear-ticket', compact('zonas_empresa'));
+        return view('livewire.crear-ticket', compact('zonas_empresa', 'tipos_evidencias'));
     }
 
     public function crear()
     {
 
-        // Formulario integracion de pagos
-        if($this->tipo_formulario_id == 1)
+        $data = [];
+
+        
+        if($this->tipo_formulario_id == 1) // Integracion de pagos
         {
             $data = $this->validarFormularioIntegracionDePago();
 
-            $data['usuario_solicita_id'] = auth()->user()->id;
-            $data['empresa_id']          = auth()->user()->empresa_id;
-            $data['estatus_ticket_id']   = 1;
-            $data['usuario_asignado_id'] = $this->getUsuarioAsigandoId();
-            $data['tipo_formulario_id']  = $this->tipo_formulario_id;
 
-            Tickets::create($data);
+        }else if($this->tipo_formulario_id == 2){ // Evidencia gestión
 
-            session()->flash('success', 'Ticket creado exitosamente');
+            $data = $this->validarFormularioEvidenciaGestion();
 
-            $this->reset(['descripcion_solicitud', 'zona_empresa_id', 'deudor', 'fecha_transferencia', 'monto']);
+        }else if($this->tipo_formulario_id == 3){ // Seguimiento de cuenta
+
+            $data = $this->validarFormularioSeguimientoDeCuenta();
+
+        }else if($this->tipo_formulario_id == 4){ // Expediente Legal
+
+            $data = $this->validarFormularioExpedienteLegal();
+
+        }else if($this->tipo_formulario_id == 5){ // CPR Y BKHL
+
+            $data = $this->validarFormularioCPRYBKHL();
+
         }
+
+        $data['usuario_solicita_id'] = auth()->user()->id;
+        $data['empresa_id']          = auth()->user()->empresa_id;
+        $data['estatus_ticket_id']   = 1;
+        $data['usuario_asignado_id'] = $this->getUsuarioAsigandoId();
+        $data['tipo_formulario_id']  = $this->tipo_formulario_id;
+
+        Tickets::create($data);
+
+        session()->flash('success', 'Ticket creado exitosamente');
+
+        $this->reset(['descripcion_solicitud', 'zona_empresa_id', 'deudor', 
+                                    'fecha_transferencia', 'monto', 'tipo_evidencia_id', 'folios_factura']);
 
     }
 
@@ -73,6 +100,56 @@ class CrearTicket extends Component
         return $validatedData;
     }
 
+    public function validarFormularioEvidenciaGestion()
+    {
+        $validatedData = $this->validate([
+            'descripcion_solicitud' => 'required',
+            'zona_empresa_id'       => 'required',
+            'deudor'                => 'required',
+            'tipo_evidencia_id'     => 'required',
+            'folios_factura'        => 'required'
+        ]);
+
+        return $validatedData;
+    }
+
+    public function validarFormularioSeguimientoDeCuenta()
+    {
+        $validatedData = $this->validate([
+            'descripcion_solicitud' => 'required',
+            'zona_empresa_id'       => 'required',
+            'deudor'                => 'required',
+            'tipo_evidencia_id'     => 'required'
+        ]);
+
+        return $validatedData;
+    }
+
+    public function validarFormularioExpedienteLegal()
+    {
+        $validatedData = $this->validate([
+            'descripcion_solicitud' => 'required',
+            'zona_empresa_id'       => 'required',
+            'deudor'                => 'required'
+        ]);
+
+        return $validatedData;
+    }
+
+    public function validarFormularioCPRYBKHL()
+    {
+        $validatedData = $this->validate([
+            'descripcion_solicitud' => 'required',
+            'zona_empresa_id'       => 'required',
+            'cpr_bkhl'              => 'required'
+        ]);
+
+        return $validatedData;
+    }
+
+    /**
+     * Regresa al agente asignado a la zona
+     */
     public function getUsuarioAsigandoId()
     {
         $zonaUsuario = ZonaUsuario::where('zona_empresa_id', $this->zona_empresa_id)->first();

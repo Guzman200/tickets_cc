@@ -390,7 +390,7 @@
                     {{-- CPR Y BKHL --}}
                     <div class="col-md-12">
                         <div class="input-group input-group-static my-3 @error('cpr_bkhl') is-invalid @enderror @if($cpr_bkhl != '') is-filled @endif">
-                            <label>CPR Y BKHL</label>
+                            <label>CPR / BKHL</label>
                             <input wire:model.lazy="cpr_bkhl" type="text" class="form-control">
                         </div>
                         @error('cpr_bkhl')

@@ -38,7 +38,7 @@ class CrearTicket extends Component
     {
 
         $zonas_empresa    = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->orderBy('zona')->get();
-        $tipos_evidencias = TipoEvidencia::get();
+        $tipos_evidencias = TipoEvidencia::orderBy('tipo')->get();
 
         return view('livewire.crear-ticket', compact('zonas_empresa', 'tipos_evidencias'));
     }

@@ -77,6 +77,7 @@ class CrearTicket extends Component
         $data['estatus_ticket_id']   = 1;
         $data['usuario_asignado_id'] = $this->getUsuarioAsigandoId();
         $data['tipo_formulario_id']  = $this->tipo_formulario_id;
+        $data['no_cuenta_deudor']    = $this->no_cuenta_deudor;
 
         Tickets::create($data);
 

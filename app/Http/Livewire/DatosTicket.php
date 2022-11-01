@@ -20,7 +20,10 @@ class DatosTicket extends Component
         $date = Carbon::parse($ticket->created_at);
         $ticket->fecha_registro = $date->locale('es')->format('d/m/Y h:i:s A');
         $ticket->fecha_transferencia = Carbon::parse($ticket->fecha_transferencia)->format('d/m/Y ');
-
+        if(!is_null($ticket->fecha_update_atentido)){
+            $ticket->fecha_update_atentido = Carbon::parse($ticket->fecha_update_atentido)
+                ->format('d/m/Y h:i:s A');
+        }
 
         return view('livewire.datos-ticket', compact('ticket', 'estatusTickets'));
     }

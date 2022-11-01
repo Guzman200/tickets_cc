@@ -19,7 +19,11 @@
                         Editar estatus</th>
                     @endif
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Fecha de alta</th>
+                        Fecha de alta
+                    </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Fecha de cierre
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -89,6 +93,11 @@
                     <td class="align-middle text-center">
                         <span
                             class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-normal">
+                            {{ is_null($ticket->fecha_update_atentido) ? '-' : $ticket->fecha_update_atentido }}
+                        </span>
                     </td>
                 </tr>
 

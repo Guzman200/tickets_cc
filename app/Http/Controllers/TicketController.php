@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EstatusTicket;
 use App\Models\Tickets;
 use App\Models\TipoFormulario;
 use Carbon\Carbon;
@@ -59,11 +60,6 @@ class TicketController extends Controller
             }
 
         }
-
-        $date = Carbon::parse($ticket->created_at);
-        //$ticket->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
-        $ticket->fecha_registro = $date->locale('es')->format('d/m/Y h:i:s A');
-        $ticket->fecha_transferencia = Carbon::parse($ticket->fecha_transferencia)->format('d/m/Y ');
 
         return view('ver_descripcion', compact("ticket"));
     }

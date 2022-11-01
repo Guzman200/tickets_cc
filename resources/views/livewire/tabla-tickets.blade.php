@@ -10,7 +10,7 @@
                         <div class="input-group input-group-static mb-4">
                             <label>Buscar</label>
                             <input wire:model="search" type="search" class="form-control"
-                                placeholder="Folio | Solicitante | Asignado A | Estatus">
+                                placeholder="Folio | Solicitante | Asignado A">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -56,19 +56,20 @@
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo
                         </th>
+                        @if(!auth()->user()->esCliente())
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Solicitante</th>
+                            Solicitante
+                        </th>
+                        @endif
+                        @if(!auth()->user()->esAgente())
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Asignado a 
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Estatus</th>
-                        @if(auth()->user()->esAgente())
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Editar estatus</th>
                         @endif
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Fecha en que se realizo</th>
+                            Estatus</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Fecha de alta</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             acciones</th>
                         <th class="text-secondary opacity-7"></th>
@@ -94,13 +95,16 @@
                             </td>
 
                             {{-- NOMBRE DE QUIEN HIZO LA SOLICITUD --}}
+                            @if(!auth()->user()->esCliente())
                             <td class="align-middle text-center text-sm">
                                 <h6 class="mb-0 text-xs">{{ $ticket->usuarioSolicita->nombres }}
                                     {{ $ticket->usuarioSolicita->apellidos }}</h6>
                                 <p class="text-xs text-secondary mb-0">{{ $ticket->usuarioSolicita->email }}</p>
                             </td>
+                            @endif
 
                             {{-- NOMBRE DE QUIEN ESTA ATENDIENDO EL TICKET --}}
+                            @if(!auth()->user()->esAgente())
                             <td class="align-middle text-center text-sm">
                                 @if(isset($ticket->usuarioAsignado))
                                 <h6 class="mb-0 text-xs">{{ $ticket->usuarioAsignado->nombres }}
@@ -110,6 +114,7 @@
                                     <h6 class="mb-0 text-xs">Sin asignar</h6>
                                 @endif
                             </td>
+                            @endif
 
                             <td class="align-middle text-center text-sm">
                                 @if ($ticket->estatus->id == 1)
@@ -124,40 +129,16 @@
                                     <span class="badge bg-gradient-success">{{ $ticket->estatus->estatus }}</span>
                                 @endif
                             </td>
-                            @if(auth()->user()->esAgente())
-                            <td>
-                                <div class="input-group input-group-static mb-4">
-                                    <label for="exampleFormControlSelect1" class="ms-0"></label>
-                                    <select wire:change="cambiarEstatus({{$ticket->id}}, $event.target.value)" class="form-control" id="exampleFormControlSelect1">
-                                        @foreach ($estatusTickets as $item)
-                                            @if ($ticket->estatus->id <= $item->id)
-                                                @if ($item->id == 1 || $item->id <=2)
-                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
-                                                    value="{{$item->id}}">{{$item->estatus}}
-                                                    </option>
-                                                @endif
-                                                @if ($ticket->estatus->id >= 2 && $item->id !=2)
-                                                    <option {{$ticket->estatus->id == $item->id ? 'selected' : ''}} 
-                                                        value="{{$item->id}}">{{$item->estatus}}
-                                                    </option>
-                                                @endif
-                                            @endif
 
-                                            
-                                           
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </td>
-                            @endif
                             <td class="align-middle text-center">
                                 <span
                                     class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>
                             </td>
+
                             <td class="align-middle text-center">
                                 <a href="{{ route('ver_descripcion', ['ticket' => $ticket->id]) }}"
                                     class="btn bg-gradient-primary">
-                                    Ver Descripción
+                                    Ver detalle
                                 </a>
                             </td>
 

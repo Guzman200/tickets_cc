@@ -104,20 +104,4 @@ class TablaTickets extends Component
         return view('livewire.tabla-tickets', compact('tickets', 'estatusTickets', 'tiposFormularios'));
     }
 
-    public function cambiarEstatus($ticket_id, $estatus_id)
-    {
-        $data = ['estatus_ticket_id' => $estatus_id];
-
-        // Si el estatus es en proceso
-        if($estatus_id == 2){
-            $data = ['estatus_ticket_id' => $estatus_id, 'fecha_update_en_proceso' => Carbon::now()];
-        }
-
-        // Si el estatus es atendido
-        if($estatus_id == 3){
-            $data = ['estatus_ticket_id' => $estatus_id, 'fecha_update_atendido' => Carbon::now()];
-        }
-
-        Tickets::findOrFail($ticket_id)->update($data);
-    }
 }

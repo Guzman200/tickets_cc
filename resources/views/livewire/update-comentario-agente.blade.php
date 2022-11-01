@@ -1,5 +1,5 @@
 <div>
-    @if(auth()->user()->esAgente())
+    @if(auth()->user()->esAgente() && $ticket->estatus_ticket_id != 3)
     <h5 class="font-weight-normal text-info text-gradient mt-4">Comentario agente</h5>
     <div class="card card-frame">
         <div class="card-body">

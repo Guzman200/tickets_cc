@@ -36,7 +36,8 @@ class TablaUsuarios extends Component
 
         foreach($users as $user){
             $date = Carbon::parse($user->created_at);
-            $user->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
+            //$user->fecha_registro = $date->locale('es')->translatedFormat('l d \\de  F \\de\\l Y \\a \\l\\a\\s h:i:s A');
+            $user->fecha_registro = $date->locale('es')->format('d/m/Y h:i:s A');
         }
 
         return view('livewire.tabla-usuarios', compact('users'));

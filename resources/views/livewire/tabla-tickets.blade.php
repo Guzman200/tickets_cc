@@ -15,8 +15,28 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="input-group input-group-static mb-4">
-                            <label>Fecha del ticket</label>
+                            <label>Estatus del ticket</label>
                             <input wire:model="fecha" type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="input-group input-group-static my-3">
+                            <select wire:model="estatus_ticket_id" class="form-control custom-select">
+                                <option value="">Seleccionar estatus</option>
+                                @foreach ($estatusTickets as $estatus)
+                                    <option value="{{ $estatus->id }}">{{ $estatus->estatus }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="input-group input-group-static my-3">
+                            <select wire:model="tipo_formulario_id" class="form-control custom-select">
+                                <option value="">Seleccionar tipo</option>
+                                @foreach ($tiposFormularios as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -87,5 +87,12 @@ class User extends Authenticatable
         return $this->tipo_usuario_id == 4;
     }
 
+    /** Scopes locales */
+
+    public function scopeAgentes($query)
+    {
+        return $query->where('tipo_usuario_id', 3);
+    }
+
      
 }

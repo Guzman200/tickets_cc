@@ -18,6 +18,11 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Editar estatus</th>
                     @endif
+                    @if(auth()->user()->esAdmin() & $ticket->estatus_ticket_id != 3)
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Cambiar agente
+                        </th>
+                    @endif
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Fecha de alta
                     </th>
@@ -90,6 +95,23 @@
                             </div>
                         </td>
                     @endif
+
+                    @if(auth()->user()->esAdmin() & $ticket->estatus_ticket_id != 3)
+                        <td>
+                            <div class="input-group input-group-static mb-4">
+                                <label for="exampleFormControlSelect" class="ms-0"></label>
+                                <select wire:change="cambiarAgente($event.target.value)" class="form-control" id="exampleFormControlSelect">
+                                    @foreach ($agentes as $agente)
+                                        <option value="{{$agente->id}}" 
+                                            {{$ticket->usuario_asignado_id == $agente->id ? 'selected' : ''}}>
+                                            {{$agente->nombres}} {{$agente->apellidos}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </td>
+                    @endif
+
                     <td class="align-middle text-center">
                         <span
                             class="text-secondary text-xs font-weight-normal">{{ $ticket->fecha_registro }}</span>

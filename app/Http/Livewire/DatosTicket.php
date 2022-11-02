@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\EstatusTicket;
 use App\Models\Tickets;
+use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -26,7 +27,9 @@ class DatosTicket extends Component
                 ->format('d/m/Y h:i:s A');
         }
 
-        return view('livewire.datos-ticket', compact('ticket', 'estatusTickets'));
+        $agentes = User::agentes()->where('empresa_id', $ticket->empresa_id)->get();
+
+        return view('livewire.datos-ticket', compact('ticket', 'estatusTickets', 'agentes'));
     }
 
     public function cambiarEstatus($ticket_id, $estatus_id)
@@ -46,5 +49,13 @@ class DatosTicket extends Component
         Tickets::findOrFail($ticket_id)->update($data);
 
         $this->emit('updatedEstatusTicket');
+    }
+
+    public function cambiarAgente($agente_id)
+    {
+        
+        Tickets::findOrFail($this->ticket_id)->update([
+            'usuario_asignado_id' => $agente_id
+        ]);
     }
 }

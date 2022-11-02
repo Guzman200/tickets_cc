@@ -35,7 +35,7 @@ class EditarUsuario extends Component
         $validatedData = $this->validate([
             'nombres'         => 'required',
             'apellidos'       => 'required',
-            'email'           => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user_id)],
+            'email'           => ['required', 'email', Rule::unique('sd_users', 'email')->ignore($this->user_id)],
             'password'        => 'nullable|min:5',
             'tipo_usuario_id' => 'required',
             'empresa_id'         => 'required',

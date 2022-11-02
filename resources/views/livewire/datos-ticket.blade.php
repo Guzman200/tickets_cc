@@ -96,7 +96,7 @@
                     </td>
                     <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-normal">
-                            {{ is_null($ticket->fecha_update_atentido) ? '-' : $ticket->fecha_update_atentido }}
+                            {{ is_null($ticket->fecha_update_atendido) ? '-' : $ticket->fecha_update_atendido }}
                         </span>
                     </td>
                 </tr>

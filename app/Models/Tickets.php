@@ -48,4 +48,16 @@ class Tickets extends Model
     {
         return $this->belongsTo(TipoEvidencia::class, 'tipo_evidencia_id', 'id');
     }
+
+    public function comentarios()
+    {
+        return $this->hasMany(TicketComentario::class, 'ticket_id', 'id')
+            ->orderBy('created_at', 'DESC');
+    }
+
+    public function archivos()
+    {
+        return $this->hasMany(TicketFile::class, 'ticket_id', 'id')
+            ->orderBy('created_at', 'DESC');
+    }
 }

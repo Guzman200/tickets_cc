@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\TicketComentario;
 use App\Models\Tickets;
 use Livewire\Component;
 
 class UpdateComentarioAgente extends Component
 {
+
+    protected $listeners = ['updatedEstatusTicket'];
 
     public $ticket_id;
     public $comentario_agente;
@@ -19,10 +22,10 @@ class UpdateComentarioAgente extends Component
         return view('livewire.update-comentario-agente', compact('ticket'));
     }
 
-    public function updateComentario()
+    public function guardarComentario()
     {
 
-        $validatedData = $this->validate([
+        $this->validate([
             'comentario_agente'         => 'required'
         ], [], [
             'comentario_agente' => 'comentario agente'
@@ -30,8 +33,20 @@ class UpdateComentarioAgente extends Component
 
         $ticket = Tickets::findOrFail($this->ticket_id);
 
-        $ticket->update($validatedData);
+        TicketComentario::create([
+            'ticket_id'         => $this->ticket_id,
+            'comentario'        => $this->comentario_agente,
+            'estatus_ticket_id' => $ticket->estatus_ticket_id,
+            'agente_id'         => auth()->user()->id
+        ]);
 
-        session()->flash('success', 'Cambios guardados exitosamente');
+        $this->comentario_agente = "";
+
+        session()->flash('success', 'Tu comentario se ha realizado exitosamente');
+    }
+
+    public function updatedEstatusTicket()
+    {
+        //
     }
 }

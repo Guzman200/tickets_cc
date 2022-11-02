@@ -44,5 +44,7 @@ class DatosTicket extends Component
         }
 
         Tickets::findOrFail($ticket_id)->update($data);
+
+        $this->emit('updatedEstatusTicket');
     }
 }

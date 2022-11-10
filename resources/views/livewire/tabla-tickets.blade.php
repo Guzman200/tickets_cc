@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="input-group input-group-static mb-4">
-                            <label>Estatus del ticket</label>
+                            <label>Fecha del ticket</label>
                             <input wire:model="fecha" type="date" class="form-control">
                         </div>
                     </div>

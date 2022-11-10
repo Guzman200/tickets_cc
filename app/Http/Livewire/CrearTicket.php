@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Tickets;
 use App\Models\TipoEvidencia;
+use App\Models\TipoPrioridad;
 use App\Models\ZonaEmpresa;
 use App\Models\ZonaUsuario;
 use Livewire\Component;
@@ -23,6 +24,7 @@ class CrearTicket extends Component
     public $tipo_evidencia_id;
     public $folios_factura;
     public $cpr_bkhl;
+    public $tipo_prioridad_id;
 
     protected $validationAttributes = [
         'descripcion_solicitud' => 'descripción de la solicitud',
@@ -31,7 +33,8 @@ class CrearTicket extends Component
         'deudor'                => 'deudor',
         'fecha_transferencia'   => 'fecha transferencia',
         'monto'                 => 'monto',
-        'tipo_evidencia_id'     => 'tipo de evidencia'
+        'tipo_evidencia_id'     => 'tipo de evidencia',
+        'tipo_prioridad_id'     => 'tipo prioridad'
     ];
 
     public function render()
@@ -39,8 +42,9 @@ class CrearTicket extends Component
 
         $zonas_empresa    = ZonaEmpresa::where('empresa_id', auth()->user()->empresa_id)->orderBy('zona')->get();
         $tipos_evidencias = TipoEvidencia::orderBy('tipo')->get();
+        $tipos_prioridad = TipoPrioridad::orderBy('tipo')->get();
 
-        return view('livewire.crear-ticket', compact('zonas_empresa', 'tipos_evidencias'));
+        return view('livewire.crear-ticket', compact('zonas_empresa', 'tipos_evidencias', 'tipos_prioridad'));
     }
 
     public function crear()
@@ -95,7 +99,8 @@ class CrearTicket extends Component
             'zona_empresa_id'       => 'required',
             'deudor'                => 'required',
             'fecha_transferencia'   => 'required',
-            'monto'                 => 'required|numeric'
+            'monto'                 => 'required|numeric',
+            'tipo_prioridad_id'     => 'required'
         ]);
 
         return $validatedData;
@@ -108,7 +113,8 @@ class CrearTicket extends Component
             'zona_empresa_id'       => 'required',
             'deudor'                => 'required',
             'tipo_evidencia_id'     => 'required',
-            'folios_factura'        => 'required'
+            'folios_factura'        => 'required',
+            'tipo_prioridad_id'     => 'required'
         ]);
 
         return $validatedData;
@@ -120,7 +126,8 @@ class CrearTicket extends Component
             'descripcion_solicitud' => 'required',
             'zona_empresa_id'       => 'required',
             'deudor'                => 'required',
-            'tipo_evidencia_id'     => 'required'
+            'tipo_evidencia_id'     => 'required',
+            'tipo_prioridad_id'     => 'required'
         ]);
 
         return $validatedData;
@@ -131,7 +138,8 @@ class CrearTicket extends Component
         $validatedData = $this->validate([
             'descripcion_solicitud' => 'required',
             'zona_empresa_id'       => 'required',
-            'deudor'                => 'required'
+            'deudor'                => 'required',
+            'tipo_prioridad_id'     => 'required'
         ]);
 
         return $validatedData;
@@ -142,7 +150,8 @@ class CrearTicket extends Component
         $validatedData = $this->validate([
             'descripcion_solicitud' => 'required',
             'zona_empresa_id'       => 'required',
-            'cpr_bkhl'              => 'required'
+            'cpr_bkhl'              => 'required',
+            'tipo_prioridad_id'     => 'required'
         ]);
 
         return $validatedData;

@@ -60,4 +60,9 @@ class Tickets extends Model
         return $this->hasMany(TicketFile::class, 'ticket_id', 'id')
             ->orderBy('created_at', 'DESC');
     }
+
+    public function tipoPrioridad()
+    {
+        return $this->belongsTo(TipoPrioridad::class, 'tipo_prioridad_id', 'id');
+    }
 }

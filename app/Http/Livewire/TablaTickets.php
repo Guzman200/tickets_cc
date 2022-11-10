@@ -53,6 +53,9 @@ class TablaTickets extends Component
                     })
                     ->orWhereHas('tipoFormulario', function($query) use ($search){
                         $query->where('nombre', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('tipoPrioridad', function($query) use ($search){
+                        $query->where('tipo', 'like', "%{$search}%");
                     });
             });
 

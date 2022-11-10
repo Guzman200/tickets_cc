@@ -32,6 +32,21 @@
                         @enderror
                     </div>
 
+                    {{-- TIPO DE PRIORIDAD --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3 @error('tipo_prioridad_id') is-invalid @enderror">
+                            <select wire:model.lazy="tipo_prioridad_id" class="form-control custom-select">
+                                <option value="">Selecciona una prioridad <sup>*</sup></option>
+                                @foreach ($tipos_prioridad as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('tipo_prioridad_id')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
                     {{-- ZONAS --}}
                     <div class="col-md-12">
                         <div class="input-group input-group-static my-3 @error('zona_empresa_id') is-invalid @enderror">
@@ -117,6 +132,21 @@
                             
                         </div>
                         @error('descripcion_solicitud')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
+                    {{-- TIPO DE PRIORIDAD --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3 @error('tipo_prioridad_id') is-invalid @enderror">
+                            <select wire:model.lazy="tipo_prioridad_id" class="form-control custom-select">
+                                <option value="">Selecciona una prioridad <sup>*</sup></option>
+                                @foreach ($tipos_prioridad as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('tipo_prioridad_id')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
@@ -219,6 +249,21 @@
                         @enderror
                     </div>
 
+                    {{-- TIPO DE PRIORIDAD --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3 @error('tipo_prioridad_id') is-invalid @enderror">
+                            <select wire:model.lazy="tipo_prioridad_id" class="form-control custom-select">
+                                <option value="">Selecciona una prioridad <sup>*</sup></option>
+                                @foreach ($tipos_prioridad as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('tipo_prioridad_id')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
                     {{-- ZONAS --}}
                     <div class="col-md-12">
                         <div class="input-group input-group-static my-3 @error('zona_empresa_id') is-invalid @enderror">
@@ -303,6 +348,21 @@
                         @enderror
                     </div>
 
+                    {{-- TIPO DE PRIORIDAD --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3 @error('tipo_prioridad_id') is-invalid @enderror">
+                            <select wire:model.lazy="tipo_prioridad_id" class="form-control custom-select">
+                                <option value="">Selecciona una prioridad <sup>*</sup></option>
+                                @foreach ($tipos_prioridad as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('tipo_prioridad_id')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+
                     {{-- ZONAS --}}
                     <div class="col-md-12">
                         <div class="input-group input-group-static my-3 @error('zona_empresa_id') is-invalid @enderror">
@@ -368,6 +428,21 @@
                             
                         </div>
                         @error('descripcion_solicitud')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    
+                    {{-- TIPO DE PRIORIDAD --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3 @error('tipo_prioridad_id') is-invalid @enderror">
+                            <select wire:model.lazy="tipo_prioridad_id" class="form-control custom-select">
+                                <option value="">Selecciona una prioridad <sup>*</sup></option>
+                                @foreach ($tipos_prioridad as $tipo)
+                                    <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('tipo_prioridad_id')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>

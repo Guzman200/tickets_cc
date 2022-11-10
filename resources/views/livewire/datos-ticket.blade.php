@@ -14,6 +14,8 @@
                     </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Estatus</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Prioridad</th>
                     @if(auth()->user()->esAgente() & $ticket->estatus_ticket_id != 3)
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Editar estatus</th>
@@ -71,6 +73,9 @@
                             <span class="badge bg-gradient-success">{{ $ticket->estatus->estatus }}</span>
                         @endif
 
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                        {{$ticket->tipoPrioridad->tipo}}
                     </td>
                     @if(auth()->user()->esAgente() && $ticket->estatus_ticket_id != 3)
                         <td>

@@ -10,7 +10,7 @@
                         <div class="input-group input-group-static mb-4">
                             <label>Buscar</label>
                             <input wire:model="search" type="search" class="form-control"
-                                placeholder="Folio | Solicitante | Asignado A">
+                                placeholder="Folio | Solicitante | Asignado A | Prioridad">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -56,6 +56,8 @@
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo
                         </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad
+                        </th>
                         @if(!auth()->user()->esCliente())
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Solicitante
@@ -92,6 +94,11 @@
                             {{-- TIPO FORMULARIO --}}
                             <td class="align-middle text-center text-sm">
                                 <p class="text-xs font-weight-bold mb-0">{{ $ticket->tipoFormulario->nombre }}</p>
+                            </td>
+
+                            {{-- PRIORIDAD --}}
+                            <td class="align-middle text-center text-sm">
+                                <p class="text-xs font-weight-bold mb-0">{{ $ticket->tipoPrioridad->tipo }}</p>
                             </td>
 
                             {{-- NOMBRE DE QUIEN HIZO LA SOLICITUD --}}

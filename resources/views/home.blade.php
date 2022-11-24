@@ -190,7 +190,7 @@
 
             let empresas = document.getElementById('select-empresas').value;
 
-            let peticion = await fetch(`/get-data-chart/estatus-tickets?empresas=${empresas}`, {
+            let peticion = await fetch(`get-data-chart/estatus-tickets?empresas=${empresas}`, {
                 method : 'GET',
                 params : {
                     _token : csrf

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -64,5 +65,28 @@ class Tickets extends Model
     public function tipoPrioridad()
     {
         return $this->belongsTo(TipoPrioridad::class, 'tipo_prioridad_id', 'id');
+    }
+
+    /** Scopes locales */
+
+    public function scopeAbierto(Builder $query)
+    {
+        return $query->whereHas('estatus', function($query){
+            $query->where('id', 1);
+        });
+    }
+
+    public function scopeEnProceso(Builder $query)
+    {
+        return $query->whereHas('estatus', function($query){
+            $query->where('id', 2);
+        });
+    }
+
+    public function scopeAtendido(Builder $query)
+    {
+        return $query->whereHas('estatus', function($query){
+            $query->where('id', 3);
+        });
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
 use App\Models\TipoFormulario;
 use App\Models\User;
@@ -21,7 +22,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/get-data-chart/estatus-tickets', [HomeController::class, 'getDataChartEstatusTickets']);
 
     Route::group(['middleware' => 'admin'], function () {
 

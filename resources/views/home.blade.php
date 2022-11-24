@@ -2,75 +2,61 @@
 
 @section('page', 'Inicio')
 
+@section('styles')
+    @livewireStyles
+@endsection
+
 @section('content')
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-header p-3 pt-2">
-                    <div
-                        class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">weekend</i>
+
+    @csrf
+
+    
+    <div class="row card @if(!auth()->user()->esAdmin()) d-none @endif">
+        <div class="col-xl-4 col-md-12">
+            <form>
+                <div class="row">
+                    
+                    {{-- CLIENTE --}}
+                    <div class="col-md-12">
+                        <div class="input-group input-group-static my-3">
+                            <select id="select-empresas" class="form-control custom-select">
+                                <option value="all">Selecciona una empresa</option>
+                                @foreach ($empresas as $empresa)
+                                    <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                        <h4 class="mb-0">$53k</h4>
+
+                    
+
+                
+                </div>
+                <div class="row d-flex justify-content-end mt-2">
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <button id="btnAplicarFiltros" class=" btn btn-primary" type="button">
+                                Aplicar filtros
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55%
-                        </span>than lask week</p>
-                </div>
-            </div>
+            </form>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-header p-3 pt-2">
-                    <div
-                        class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                        <h4 class="mb-0">2,300</h4>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3%
-                        </span>than lask month</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-header p-3 pt-2">
-                    <div
-                        class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                        <h4 class="mb-0">3,462</h4>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
-                        yesterday</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-xl-4 col-sm-6">
             <div class="card">
                 <div class="card-header p-3 pt-2">
                     <div
                         class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">weekend</i>
+                        <i class="material-icons opacity-10">speaker_notes</i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Sales</p>
-                        <h4 class="mb-0">$103,430</h4>
+                        <p class="text-sm mb-0 text-capitalize">Tickets abiertos</p>
+                        <h4 id="tickets-abiertos" class="mb-0">0</h4>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -80,6 +66,45 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div
+                        class="icon icon-lg icon-shape bg-gradient-warning shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">speaker_notes</i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Tickets en proceso</p>
+                        <h4 id="tickets-en-proceso" class="mb-0">0</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3%
+                        </span>than lask month</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-header p-3 pt-2">
+                    <div
+                        class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                        <i class="material-icons opacity-10">speaker_notes</i>
+                    </div>
+                    <div class="text-end pt-1">
+                        <p class="text-sm mb-0 text-capitalize">Tickets atendidos</p>
+                        <h4 id="tickets-atendidos" class="mb-0">0</h4>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-3">
+                    <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than
+                        yesterday</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <div class="row mt-4">
@@ -145,4 +170,47 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @livewireScripts
+
+    <script>
+
+        let csrf = document.getElementsByName('_token')[0].value;
+
+        document.getElementById('btnAplicarFiltros').addEventListener('click', function(){
+
+            getDataChartEstatusTickets();
+
+        })
+
+
+        async function getDataChartEstatusTickets(){
+
+            let empresas = document.getElementById('select-empresas').value;
+
+            let peticion = await fetch(`/get-data-chart/estatus-tickets?empresas=${empresas}`, {
+                method : 'GET',
+                params : {
+                    _token : csrf
+                }
+            });
+
+            let response = await peticion.json();
+
+            document.getElementById('tickets-abiertos').textContent   = response.abiertos;
+            document.getElementById('tickets-en-proceso').textContent = response.en_proceso;
+            document.getElementById('tickets-atendidos').textContent  = response.atendidos;
+
+            console.log(response);
+
+        }
+
+        getDataChartEstatusTickets();
+
+
+
+    </script>
+
 @endsection

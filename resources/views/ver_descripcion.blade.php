@@ -9,7 +9,6 @@
 @section('content')
     @livewireStyles
 
-
     <h5 class="font-weight-normal text-info text-gradient">Datos del ticket</h5>
 
     @livewire('datos-ticket', ['ticket_id' => $ticket->id])
@@ -241,13 +240,6 @@
             </div>
         </div>
     @endif
-
-	<h5 class="font-weight-normal text-info text-gradient">Descripción de la solicitud</h5>
-    <div class="card card-frame">
-        <div class="card-body">
-            {{ $ticket->descripcion_solicitud }}
-        </div>
-    </div>
 
     @livewire('update-comentario-agente', ['ticket_id' => $ticket->id])
 

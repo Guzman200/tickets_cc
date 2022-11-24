@@ -1,5 +1,6 @@
 <div>
-    @if (auth()->user()->esAgente() && $ticket->estatus_ticket_id != 3)
+    @if ( ( auth()->user()->esAgente() || (auth()->user()->esAdmin() && $ticket->estaAsignadoAlUsuarioEnSesion())   ) 
+        && $ticket->estatus_ticket_id != 3)
 
         <div class="card h-100 mt-4">
             <div class="card-header pb-0">

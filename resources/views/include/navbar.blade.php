@@ -12,16 +12,16 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            {{--
+            @if(auth()->user()->esAdmin() || auth()->user()->esAdminCliente())
             <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'home' ? 'active' : ''}}" href="{{route('home')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link text-dark {{ Route::currentRouteName() == 'home' ? 'active' : ''}}" href="{{route('home')}}">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Inicio</span>
                 </a>
             </li>
-            --}}
+            @endif
             @if(auth()->user()->esAdmin())
             <li class="nav-item">
                 <a class="nav-link text-dark {{Route::currentRouteName() == 'users' ? 'bg-gradient-info active' : ''}}" href="{{route('users')}}">

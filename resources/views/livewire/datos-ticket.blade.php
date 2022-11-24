@@ -16,7 +16,9 @@
                         Estatus</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Prioridad</th>
-                    @if(auth()->user()->esAgente() & $ticket->estatus_ticket_id != 3)
+                    @if( (
+                        auth()->user()->esAgente() || (auth()->user()->esAdmin() && $ticket->estaAsignadoAlUsuarioEnSesion())  
+                       ) && $ticket->estatus_ticket_id != 3)
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Editar estatus</th>
                     @endif
@@ -77,7 +79,12 @@
                     <td class="align-middle text-center text-sm">
                         {{$ticket->tipoPrioridad->tipo}}
                     </td>
-                    @if(auth()->user()->esAgente() && $ticket->estatus_ticket_id != 3)
+                    @if( 
+                        (
+                         auth()->user()->esAgente() || (auth()->user()->esAdmin() && $ticket->estaAsignadoAlUsuarioEnSesion())  
+                        ) 
+                        && $ticket->estatus_ticket_id != 3
+                        )
                         <td>
                             <div class="input-group input-group-static mb-4">
                                 <label for="exampleFormControlSelect1" class="ms-0"></label>

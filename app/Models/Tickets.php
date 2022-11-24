@@ -89,4 +89,11 @@ class Tickets extends Model
             $query->where('id', 3);
         });
     }
+
+    /** Metodos */
+
+    public function estaAsignadoAlUsuarioEnSesion()
+    {
+        return $this->usuario_asignado_id == auth()->user()->id;
+    }
 }

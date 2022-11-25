@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/get-data-chart/estatus-tickets', [HomeController::class, 'getDataChartEstatusTickets']);
+    Route::get('/get-data-chart/dashboard', [HomeController::class, 'getDataChartDashboard']);
 
     Route::group(['middleware' => 'admin'], function () {
 

@@ -14,7 +14,7 @@
         <ul class="navbar-nav">
             @if(auth()->user()->esAdmin() || auth()->user()->esAdminCliente())
             <li class="nav-item">
-                <a class="nav-link text-dark {{ Route::currentRouteName() == 'home' ? 'active' : ''}}" href="{{route('home')}}">
+                <a class="nav-link text-dark {{ Route::currentRouteName() == 'home' ? 'bg-gradient-info active' : ''}}" href="{{route('home')}}">
                     <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>

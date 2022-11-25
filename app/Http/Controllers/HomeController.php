@@ -84,6 +84,7 @@ class HomeController extends Controller
                 $ticketsPorCategoria = Tickets::selectRaw('tipo_formulario_id, count(*) as total')
                     ->where('empresa_id', $request->empresas)
                     ->groupBy('tipo_formulario_id')
+                    ->orderBy('total', 'DESC')
                     ->get();
 
 
@@ -115,7 +116,9 @@ class HomeController extends Controller
                 ->get();
 
                 $ticketsPorCategoria = Tickets::selectRaw('tipo_formulario_id, count(*) as total')
-                    ->groupBy('tipo_formulario_id')->get();
+                    ->groupBy('tipo_formulario_id')
+                    ->orderBy('total', 'DESC')
+                    ->get();
 
             }
 
@@ -149,6 +152,7 @@ class HomeController extends Controller
             $ticketsPorCategoria = Tickets::selectRaw('tipo_formulario_id, count(*) as total')
                 ->where('empresa_id',  auth()->user()->empresa_id)
                 ->groupBy('tipo_formulario_id')
+                ->orderBy('total', 'DESC')
                 ->get();
 
         }

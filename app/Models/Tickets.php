@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -95,5 +96,33 @@ class Tickets extends Model
     public function estaAsignadoAlUsuarioEnSesion()
     {
         return $this->usuario_asignado_id == auth()->user()->id;
+    }
+
+    public function getTiempoDeAtencion()
+    {
+
+        $fechaBase = Carbon::now();
+
+        // Si el estatus es atendido
+        if($this->estatus_ticket_id == 3){ 
+            $fechaBase = Carbon::parse($this->fecha_update_atendido); 
+        }
+
+        $fechaTicketApertura = Carbon::parse($this->created_at);
+
+        $tiempoEnMinutos = $fechaTicketApertura->diffInMinutes($fechaBase);
+        
+        $tiempoArray = explode(".", $tiempoEnMinutos / 60);
+
+        $horas = $tiempoArray[0];
+
+        if($tiempoEnMinutos % 60 != 0){
+
+            $minutos = $tiempoEnMinutos % 60;
+
+            return $horas . " hrs con " . $minutos . " min";
+        }
+
+        return $horas . " hrs";
     }
 }

@@ -1,6 +1,12 @@
 <div>
 
 
+    <div class="card card-frame">
+        <div class="card-body">
+            {{ $ticket->descripcion_solicitud }}
+        </div>
+    </div>
+    <br>
    
     <div class="card card-frame">
         
@@ -97,6 +103,9 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Fecha de cierre
                         </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Tiempo de atención
+                        </th>
                         @if( (
                             auth()->user()->esAgente() || (auth()->user()->esAdmin() && $ticket->estaAsignadoAlUsuarioEnSesion())  
                             ) && $ticket->estatus_ticket_id != 3)
@@ -118,7 +127,12 @@
                         </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-normal">
-                                {{ is_null($ticket->fecha_update_atendido) ? '-' : $ticket->fecha_update_atendido }}
+                                {{ is_null($ticket->fecha_update_atendido_) ? '-' : $ticket->fecha_update_atendido_ }}
+                            </span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-normal">
+                                {{ $ticket->getTiempoDeAtencion() }}
                             </span>
                         </td>
                         @if( 
@@ -174,16 +188,8 @@
         </div>
 
     </div>
-
-
     <br>
 
-    <div class="card card-frame">
-        <div class="card-body">
-            {{ $ticket->descripcion_solicitud }}
-        </div>
-    </div>
-    <br>
 
     
 </div>

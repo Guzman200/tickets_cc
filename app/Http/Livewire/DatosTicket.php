@@ -23,7 +23,7 @@ class DatosTicket extends Component
         $ticket->fecha_transferencia = Carbon::parse($ticket->fecha_transferencia)->format('d/m/Y ');
         
         if(!is_null($ticket->fecha_update_atendido)){
-            $ticket->fecha_update_atendido = Carbon::parse($ticket->fecha_update_atendido)
+            $ticket->fecha_update_atendido_ = Carbon::parse($ticket->fecha_update_atendido)
                 ->format('d/m/Y h:i:s A');
         }
 

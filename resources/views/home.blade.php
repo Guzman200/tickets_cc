@@ -141,7 +141,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card h-100 mt-4 mb-4">
+            <div class="card mt-4 mb-4">
                 <div class="card-header pb-0 px-3">
                     <div class="row">
                         <div class="col-md-12">
@@ -312,7 +312,7 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: "Tickets levantados",
+                        label: "Tickets atendidos",
                         tension: 0,
                         borderWidth: 0,
                         pointRadius: 5,
